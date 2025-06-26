@@ -19,11 +19,11 @@ const OurTeam: React.FC = () => {
       linkedin: "#"
     },
     {
-      name: "Dr. Amina Hassan",
-      role: "Chief Technical Officer",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=compress&w=400&h=400&fit=crop",
-      bio: "PhD in Electrical Engineering with expertise in solar technology and grid integration. Leads our technical innovation.",
-      expertise: ["Solar Engineering", "Grid Integration", "R&D"],
+      name: "Alex Osinachi",
+      role: "Chief Technology Officer",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=compress&w=400&h=400&fit=crop",
+      bio: "Technology visionary with deep expertise in renewable energy systems and digital innovation. Drives our technological advancement and product development.",
+      expertise: ["Technology Strategy", "Product Development", "Digital Innovation"],
       linkedin: "#"
     },
     {
@@ -37,6 +37,14 @@ const OurTeam: React.FC = () => {
   ];
 
   const engineering = [
+    {
+      name: "Muheez Okunade",
+      role: "Tech Lead",
+      image: "/team/muheez-okunade.jpg",
+      bio: "Experienced technology leader specializing in full-stack development and system architecture. Leads our technical team in building innovative energy solutions.",
+      expertise: ["Full-Stack Development", "System Architecture", "Team Leadership"],
+      linkedin: "https://www.linkedin.com/in/muheez-okunade/"
+    },
     {
       name: "Sarah Johnson",
       role: "Senior Solar Engineer",
@@ -79,11 +87,18 @@ const OurTeam: React.FC = () => {
 
   const support = [
     {
-      name: "Grace Nwosu",
+      name: "Onuchukwu Chioma Christabel",
       role: "Customer Success Manager",
       image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=compress&w=400&h=400&fit=crop",
-      bio: "Ensures exceptional customer experience and post-installation support.",
+      bio: "Ensures exceptional customer experience and post-installation support. Dedicated to building lasting relationships with our clients.",
       expertise: ["Customer Support", "Project Coordination", "Client Relations"]
+    },
+    {
+      name: "Deborah Igwe",
+      role: "Business Analyst",
+      image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=compress&w=400&h=400&fit=crop",
+      bio: "Analyzes business processes and market trends to drive strategic decision-making and operational efficiency.",
+      expertise: ["Business Analysis", "Market Research", "Process Optimization"]
     },
     {
       name: "Ahmed Ibrahim",
@@ -202,11 +217,22 @@ const OurTeam: React.FC = () => {
           <div className="grid md:grid-cols-3 gap-8">
             {engineering.map((member, index) => (
               <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow">
-                <img 
-                  src={member.image} 
-                  alt={member.name}
-                  className="w-full h-48 object-cover"
-                />
+                <div className="relative">
+                  <img 
+                    src={member.image} 
+                    alt={member.name}
+                    className="w-full h-48 object-cover"
+                  />
+                  {member.linkedin && (
+                    <div className="absolute top-4 right-4">
+                      <Link href={member.linkedin}>
+                        <Button size="sm" variant="secondary" className="bg-white/90 hover:bg-white">
+                          LinkedIn
+                        </Button>
+                      </Link>
+                    </div>
+                  )}
+                </div>
                 <CardHeader>
                   <CardTitle className="text-lg text-primary-blue">{member.name}</CardTitle>
                   <p className="text-green-600 font-semibold">{member.role}</p>
