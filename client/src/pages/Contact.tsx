@@ -2,10 +2,12 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
 import Contact from "@/components/Contact";
+import SEO, { SEOConfigs } from "@/components/SEO";
 
 export default function ContactPage() {
   return (
     <div className="min-h-screen">
+      <SEO {...SEOConfigs.contact} />
       <Navigation />
       
       {/* Hero Section */}
@@ -25,43 +27,35 @@ export default function ContactPage() {
       <Contact />
       
       {/* FAQ Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-light-gray">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="font-poppins font-bold text-4xl text-primary-blue mb-4">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-xl text-gray-600">Quick answers to common questions</p>
+            <h2 className="font-poppins font-bold text-4xl text-primary-blue mb-4">Frequently Asked Questions</h2>
+            <p className="text-xl text-gray-600">Get answers to common questions about our services</p>
           </div>
           
-          <div className="space-y-8">
+          <div className="space-y-6">
             {[
               {
+                question: "What areas do you serve in Nigeria?",
+                answer: "We provide services across Nigeria, with primary operations in Lagos, Abuja, Port Harcourt, and surrounding areas. We can accommodate projects nationwide."
+              },
+              {
                 question: "How long does a typical installation take?",
-                answer: "Installation timelines vary based on system size and complexity. Residential systems typically take 1-3 days, while commercial and industrial installations can take 1-4 weeks. We'll provide a detailed timeline during your consultation."
+                answer: "Installation timelines vary based on project complexity. Residential systems typically take 1-3 days, while commercial installations may take 1-2 weeks. We'll provide a detailed timeline during consultation."
               },
               {
-                question: "Do you provide warranties on your systems?",
-                answer: "Yes, we provide comprehensive warranties covering equipment and workmanship. Solar panels come with 25-year performance warranties, inverters typically have 5-10 year warranties, and our installation work is guaranteed for 5 years."
+                question: "Do you provide maintenance services?",
+                answer: "Yes, we offer comprehensive maintenance packages for all our installations. This includes regular inspections, performance monitoring, and preventive maintenance to ensure optimal system performance."
               },
               {
-                question: "Can you work with my existing generator?",
-                answer: "Absolutely! We specialize in integrating new renewable energy systems with existing generators, creating hybrid solutions that maximize efficiency and reliability while reducing fuel costs."
-              },
-              {
-                question: "What maintenance is required for solar systems?",
-                answer: "Solar systems require minimal maintenance. We recommend annual professional inspections and basic cleaning. Our IoT monitoring systems can alert us to any issues, and we offer comprehensive maintenance packages."
-              },
-              {
-                question: "How do I know what size system I need?",
-                answer: "We conduct thorough energy audits to determine your exact power needs. This includes analyzing your current consumption, growth projections, and critical load requirements to design the optimal system size."
+                question: "What warranty do you provide?",
+                answer: "We provide comprehensive warranties on all our installations. Equipment warranties vary by manufacturer (typically 5-25 years), and we offer additional workmanship warranties for peace of mind."
               }
             ].map((faq, index) => (
-              <div key={index} className="bg-light-gray rounded-2xl p-8">
-                <h3 className="font-poppins font-bold text-xl text-primary-blue mb-4">
-                  {faq.question}
-                </h3>
-                <p className="text-gray-700">{faq.answer}</p>
+              <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
+                <h3 className="font-semibold text-lg text-primary-blue mb-2">{faq.question}</h3>
+                <p className="text-gray-600">{faq.answer}</p>
               </div>
             ))}
           </div>

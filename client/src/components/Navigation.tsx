@@ -18,12 +18,20 @@ export default function Navigation() {
   const isActive = (path: string) => location === path;
 
   const Logo = () => (
-    <div className="flex items-center">
+    <div className="flex items-center space-x-3">
       <img 
         src="/logo.png" 
         alt="Osinachi Renewable Energy Logo" 
         className="h-16 w-auto"
       />
+      <div className="flex items-baseline space-x-2">
+        <span className="font-inter font-bold text-xl tracking-normal" style={{ color: '#0166ba' }}>
+          OSINACHI
+        </span>
+        <span className="font-inter font-bold text-xl tracking-normal" style={{ color: '#0166ba' }}>
+          RENEWABLE ENERGY
+        </span>
+      </div>
     </div>
   );
 
@@ -64,21 +72,64 @@ export default function Navigation() {
                 </div>
               </NavigationMenuContent>
             </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuTrigger className="font-medium text-gray-700 hover:text-primary-blue">
+                About Us
+              </NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <div className="w-64 p-4">
+                  <Link href="/about" onClick={onItemClick}>
+                    <div className="block px-4 py-3 text-sm text-gray-700 hover:bg-light-gray rounded-lg">
+                      About Us
+                    </div>
+                  </Link>
+                  <Link href="/ourteam" onClick={onItemClick}>
+                    <div className="block px-4 py-3 text-sm text-gray-700 hover:bg-light-gray rounded-lg">
+                      Our Team
+                    </div>
+                  </Link>
+                  <Link href="/careers" onClick={onItemClick}>
+                    <div className="block px-4 py-3 text-sm text-gray-700 hover:bg-light-gray rounded-lg">
+                      Careers
+                    </div>
+                  </Link>
+                  <Link href="/newsblog" onClick={onItemClick}>
+                    <div className="block px-4 py-3 text-sm text-gray-700 hover:bg-light-gray rounded-lg">
+                      News & Blog
+                    </div>
+                  </Link>
+                  <Link href="/impact" onClick={onItemClick}>
+                    <div className="block px-4 py-3 text-sm text-gray-700 hover:bg-light-gray rounded-lg">
+                      Impact
+                    </div>
+                  </Link>
+                </div>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
       ) : (
-        <Link href="/services" onClick={onItemClick}>
-          <span className="block py-2 text-gray-700 hover:text-primary-blue">Services</span>
-        </Link>
+        <>
+          <Link href="/services" onClick={onItemClick}>
+            <span className="block py-2 text-gray-700 hover:text-primary-blue">Services</span>
+          </Link>
+          <Link href="/about" onClick={onItemClick}>
+            <span className="block py-2 text-gray-700 hover:text-primary-blue">About Us</span>
+          </Link>
+          <Link href="/ourteam" onClick={onItemClick}>
+            <span className="block py-2 text-gray-700 hover:text-primary-blue">Our Team</span>
+          </Link>
+          <Link href="/careers" onClick={onItemClick}>
+            <span className="block py-2 text-gray-700 hover:text-primary-blue">Careers</span>
+          </Link>
+          <Link href="/newsblog" onClick={onItemClick}>
+            <span className="block py-2 text-gray-700 hover:text-primary-blue">News & Blog</span>
+          </Link>
+          <Link href="/impact" onClick={onItemClick}>
+            <span className="block py-2 text-gray-700 hover:text-primary-blue">Impact</span>
+          </Link>
+        </>
       )}
-      
-      <Link href="/about" onClick={onItemClick}>
-        <span className={`font-medium transition-colors duration-300 ${
-          isActive("/about") ? "text-primary-blue" : "text-gray-700 hover:text-primary-blue"
-        } ${mobile ? "block py-2" : ""}`}>
-          About
-        </span>
-      </Link>
       
       <Link href="/portfolio" onClick={onItemClick}>
         <span className={`font-medium transition-colors duration-300 ${

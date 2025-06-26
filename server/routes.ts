@@ -3,6 +3,23 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertContactSubmissionSchema } from "@shared/schema";
 import { z } from "zod";
+import express from 'express';
+import path from 'path';
+import { generateSitemapXML, robotsTxt } from '../client/src/utils/sitemap';
+
+const router = express.Router();
+
+// Serve sitemap.xml
+router.get('/sitemap.xml', (req, res) => {
+  res.header('Content-Type', 'application/xml');
+  res.send(generateSitemapXML());
+});
+
+// Serve robots.txt
+router.get('/robots.txt', (req, res) => {
+  res.header('Content-Type', 'text/plain');
+  res.send(robotsTxt);
+});
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Contact form submission
@@ -53,3 +70,5 @@ export async function registerRoutes(app: Express): Promise<Server> {
   const httpServer = createServer(app);
   return httpServer;
 }
+
+export default router;

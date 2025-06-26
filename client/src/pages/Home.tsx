@@ -10,10 +10,12 @@ import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
+import SEO, { SEOConfigs } from "@/components/SEO";
 
 export default function Home() {
   return (
     <div className="min-h-screen">
+      <SEO {...SEOConfigs.home} />
       <Navigation />
       <Hero />
       <PainPoints />

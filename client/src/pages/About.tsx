@@ -1,6 +1,7 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
+import SEO, { SEOConfigs } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 
@@ -37,6 +38,7 @@ export default function About() {
 
   return (
     <div className="min-h-screen">
+      <SEO {...SEOConfigs.about} />
       <Navigation />
       
       {/* Hero Section */}
@@ -72,8 +74,8 @@ export default function About() {
             </div>
             <div>
               <img 
-                src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
-                alt="Osinachi team at work" 
+                src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=compress&w=800&h=600&fit=crop" 
+                alt="Solar installation in Nigerian setting - African energy landscape" 
                 className="rounded-2xl shadow-lg w-full h-auto"
               />
             </div>
@@ -107,7 +109,7 @@ export default function About() {
             <h2 className="font-poppins font-bold text-4xl mb-4">Our Proven Results</h2>
             <p className="text-xl text-gray-200">Numbers that speak to our commitment to excellence</p>
           </div>
-          
+
           <div className="grid md:grid-cols-4 gap-8">
             {achievements.map((achievement, index) => (
               <div key={index} className="text-center">

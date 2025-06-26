@@ -13,7 +13,7 @@ export default function Portfolio() {
       title: "Manufacturing Facility, Lagos",
       description: "50kW hybrid solar system with generator backup, delivering 60% reduction in diesel costs.",
       systemSize: "50kW",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300"
+      image: "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&w=800&h=600&fit=crop"
     },
     {
       id: 2,
@@ -21,7 +21,7 @@ export default function Portfolio() {
       title: "Luxury Hotel, Abuja",
       description: "Integrated power solution ensuring 24/7 guest comfort with smart energy management.",
       systemSize: "75kW",
-      image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300"
+      image: "https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg?auto=compress&w=800&h=600&fit=crop"
     },
     {
       id: 3,
@@ -29,7 +29,7 @@ export default function Portfolio() {
       title: "Private Estate, Port Harcourt",
       description: "Complete home energy solution with battery backup for uninterrupted family comfort.",
       systemSize: "15kW",
-      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300"
+      image: "https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&w=800&h=600&fit=crop"
     }
   ];
 

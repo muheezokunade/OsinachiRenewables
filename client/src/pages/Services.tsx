@@ -1,6 +1,7 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
+import SEO, { SEOConfigs } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { Settings, Sun, Search, Monitor, Check } from "lucide-react";
@@ -19,7 +20,7 @@ export default function Services() {
         "Genuine Parts Sourcing & Supply"
       ],
       brands: ["Perkins", "Caterpillar", "Cummins", "Lister"],
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600"
+      image: "https://images.pexels.com/photos/3855963/pexels-photo-3855963.jpeg?auto=compress&w=800&h=600&fit=crop"
     },
     {
       icon: Sun,
@@ -33,38 +34,39 @@ export default function Services() {
         "Professional Installation & Commissioning"
       ],
       applications: ["Oil Vessels", "Gas Stations", "Banks", "Hotels", "Homes", "Clubs", "Factories"],
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600"
+      image: "https://images.pexels.com/photos/4254168/pexels-photo-4254168.jpeg?auto=compress&w=800&h=600&fit=crop"
     },
     {
       icon: Search,
       title: "Energy Audit & Consultancy",
-      description: "Comprehensive energy assessments to optimize your power consumption and identify the most cost-effective solutions.",
+      description: "Comprehensive energy assessments to optimize your power consumption and identify cost-saving opportunities.",
       features: [
-        "Power Consumption Analysis",
-        "Load Profiling",
-        "System Efficiency Assessment",
-        "ROI Calculations",
-        "Custom Recommendations"
+        "Load Analysis",
+        "Energy Consumption Assessment",
+        "Cost-Benefit Analysis",
+        "System Optimization Recommendations",
+        "ROI Projections"
       ],
-      image: "https://images.unsplash.com/photo-1460472178825-e5240623afd5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600"
+      image: "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&w=800&h=600&fit=crop"
     },
     {
       icon: Monitor,
       title: "IoT Monitoring & Management",
-      description: "Advanced remote monitoring systems that predict issues before they happen and ensure optimal performance.",
+      description: "Real-time monitoring and predictive maintenance through advanced IoT technology for optimal system performance.",
       features: [
-        "Real-time System Monitoring",
+        "Real-Time System Monitoring",
         "Predictive Maintenance Alerts",
         "Performance Analytics",
         "Remote Troubleshooting",
-        "Mobile App Access"
+        "24/7 System Health Tracking"
       ],
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600"
+      image: "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&w=800&h=600&fit=crop"
     }
   ];
 
   return (
     <div className="min-h-screen">
+      <SEO {...SEOConfigs.services} />
       <Navigation />
       
       {/* Hero Section */}
@@ -75,108 +77,78 @@ export default function Services() {
               Our Services
             </h1>
             <p className="text-xl md:text-2xl text-gray-200">
-              Comprehensive power solutions designed to meet your specific needs and deliver reliable results.
+              Comprehensive power solutions designed to keep your operations running smoothly and efficiently.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
+      {/* Services Grid */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-20">
-            {services.map((service, index) => {
-              const IconComponent = service.icon;
-              return (
-                <div key={index} className={`grid lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
-                  <div className={index % 2 === 1 ? 'lg:col-start-2' : ''}>
-                    <div className="flex items-center mb-6">
-                      <div className="bg-accent-yellow w-16 h-16 rounded-full flex items-center justify-center mr-4">
-                        <IconComponent className="text-primary-blue h-8 w-8" />
-                      </div>
-                      <h2 className="font-poppins font-bold text-3xl text-primary-blue">{service.title}</h2>
+          <div className="grid lg:grid-cols-2 gap-12">
+            {services.map((service, index) => (
+              <div key={index} className="bg-white rounded-2xl shadow-lg overflow-hidden">
+                <div className="relative">
+                  <img 
+                    src={service.image} 
+                    alt={`${service.title} - Osinachi Renewable Energy`}
+                    className="w-full h-64 object-cover"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <div className="bg-accent-yellow p-3 rounded-full">
+                      <service.icon className="h-6 w-6 text-primary-blue" />
                     </div>
-                    <p className="text-lg text-gray-700 mb-6">{service.description}</p>
-                    
-                    <div className="mb-8">
-                      <h3 className="font-poppins font-semibold text-xl text-primary-blue mb-4">Key Features:</h3>
-                      <ul className="space-y-2">
-                        {service.features.map((feature, idx) => (
-                          <li key={idx} className="flex items-center">
-                            <Check className="text-green-600 h-5 w-5 mr-3 flex-shrink-0" />
-                            <span className="text-gray-700">{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {service.brands && (
-                      <div className="mb-8">
-                        <h3 className="font-poppins font-semibold text-xl text-primary-blue mb-4">Supported Brands:</h3>
-                        <div className="flex flex-wrap gap-2">
-                          {service.brands.map((brand, idx) => (
-                            <span key={idx} className="bg-light-gray px-3 py-1 rounded-full text-sm text-primary-blue font-medium">
-                              {brand}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    {service.applications && (
-                      <div className="mb-8">
-                        <h3 className="font-poppins font-semibold text-xl text-primary-blue mb-4">Applications:</h3>
-                        <div className="flex flex-wrap gap-2">
-                          {service.applications.map((app, idx) => (
-                            <span key={idx} className="bg-light-gray px-3 py-1 rounded-full text-sm text-primary-blue font-medium">
-                              {app}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    <Link href="/contact">
-                      <Button className="bg-primary-blue text-white hover:bg-primary-blue/90">
-                        Get Quote for This Service
-                      </Button>
-                    </Link>
+                  </div>
+                </div>
+                <div className="p-8">
+                  <h3 className="font-poppins font-bold text-2xl text-primary-blue mb-4">{service.title}</h3>
+                  <p className="text-gray-600 mb-6">{service.description}</p>
+                  
+                  <div className="mb-6">
+                    <h4 className="font-semibold text-gray-800 mb-3">Key Features:</h4>
+                    <ul className="space-y-2">
+                      {service.features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-center text-gray-600">
+                          <Check className="h-4 w-4 text-green-600 mr-2 flex-shrink-0" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                   
-                  <div className={index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}>
-                    <img 
-                      src={service.image} 
-                      alt={service.title} 
-                      className="rounded-2xl shadow-lg w-full h-auto"
-                    />
-                  </div>
+                  {service.brands && (
+                    <div className="mb-6">
+                      <h4 className="font-semibold text-gray-800 mb-3">Supported Brands:</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {service.brands.map((brand, brandIndex) => (
+                          <span key={brandIndex} className="bg-light-gray px-3 py-1 rounded-full text-sm text-gray-700">
+                            {brand}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  
+                  {service.applications && (
+                    <div className="mb-6">
+                      <h4 className="font-semibold text-gray-800 mb-3">Applications:</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {service.applications.map((app, appIndex) => (
+                          <span key={appIndex} className="bg-light-gray px-3 py-1 rounded-full text-sm text-gray-700">
+                            {app}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  
+                  <Link href="/contact">
+                    <Button className="w-full bg-accent-yellow text-primary-blue hover:bg-accent-yellow/90 font-semibold">
+                      Get Quote
+                    </Button>
+                  </Link>
                 </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Process Section */}
-      <section className="py-20 bg-light-gray">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="font-poppins font-bold text-4xl text-primary-blue mb-4">Our Service Process</h2>
-            <p className="text-xl text-gray-600">A systematic approach to delivering exceptional results</p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              "Consultation & Energy Audit",
-              "Custom System Design",
-              "Professional Installation",
-              "Ongoing Support & Monitoring"
-            ].map((step, index) => (
-              <div key={index} className="text-center">
-                <div className="bg-accent-yellow w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-primary-blue font-bold text-2xl">{index + 1}</span>
-                </div>
-                <h3 className="font-poppins font-semibold text-lg mb-2">{step}</h3>
               </div>
             ))}
           </div>
@@ -184,19 +156,26 @@ export default function Services() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-primary-blue text-white">
+      <section className="py-20 bg-light-gray">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-poppins font-bold text-4xl mb-6">
-            Ready to Transform Your Power Infrastructure?
+          <h2 className="font-poppins font-bold text-4xl text-primary-blue mb-6">
+            Ready to Transform Your Power Solutions?
           </h2>
-          <p className="text-xl text-gray-200 mb-8">
-            Let's discuss your specific needs and design a solution that delivers reliable, cost-effective power.
+          <p className="text-xl text-gray-600 mb-8">
+            Let our experts assess your needs and design a solution that works for your specific requirements.
           </p>
-          <Link href="/contact">
-            <Button size="lg" className="bg-accent-yellow text-primary-blue hover:bg-accent-yellow/90 font-semibold">
-              Schedule Your Free Consultation
-            </Button>
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/contact">
+              <Button size="lg" className="bg-accent-yellow text-primary-blue hover:bg-accent-yellow/90 font-semibold">
+                Request Free Consultation
+              </Button>
+            </Link>
+            <Link href="/portfolio">
+              <Button size="lg" variant="outline" className="border-primary-blue text-primary-blue hover:bg-primary-blue hover:text-white">
+                View Our Work
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 

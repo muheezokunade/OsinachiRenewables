@@ -19,7 +19,7 @@ export default function Solutions() {
           {/* Generator Parts & Maintenance */}
           <div className="bg-light-gray rounded-2xl p-8">
             <img 
-              src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400" 
+              src="https://images.pexels.com/photos/3855963/pexels-photo-3855963.jpeg?auto=compress&w=800&h=600&fit=crop" 
               alt="Generator maintenance service" 
               className="rounded-xl mb-6 w-full h-64 object-cover"
             />
@@ -58,7 +58,7 @@ export default function Solutions() {
           {/* Custom Inverter & Solar Systems */}
           <div className="bg-light-gray rounded-2xl p-8">
             <img 
-              src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400" 
+              src="https://images.pexels.com/photos/4254168/pexels-photo-4254168.jpeg?auto=compress&w=800&h=600&fit=crop" 
               alt="Solar panel installation" 
               className="rounded-xl mb-6 w-full h-64 object-cover"
             />

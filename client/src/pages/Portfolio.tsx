@@ -5,90 +5,10 @@ import CookieConsent from "@/components/CookieConsent";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "wouter";
+import { projects } from "../utils/portfolioData";
 
 export default function Portfolio() {
   const [activeFilter, setActiveFilter] = useState("all");
-
-  const projects = [
-    {
-      id: 1,
-      category: "industrial",
-      title: "Manufacturing Facility, Lagos",
-      client: "Mid-Sized Factory",
-      challenge: "High diesel costs and frequent production losses from grid failures were crippling profitability.",
-      approach: "Our team conducted a full energy audit and designed a hybrid system to leverage their existing generator as a final backup, not a primary source.",
-      solution: "A 50kW custom solar system with a 100kWh battery bank, integrated with their existing 250kVA generator.",
-      results: "60% reduction in monthly diesel costs, 99.9% power uptime, and a projected ROI of 3.5 years.",
-      testimonial: "Our production line hasn't stopped once since installation. The ROI exceeded our projections.",
-      systemSize: "50kW",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600"
-    },
-    {
-      id: 2,
-      category: "commercial",
-      title: "Luxury Hotel, Abuja",
-      client: "5-Star Hotel",
-      challenge: "Frequent power outages were affecting guest experience and operational efficiency, leading to complaints and lost revenue.",
-      approach: "Designed an integrated power solution that prioritizes guest comfort while maintaining operational efficiency.",
-      solution: "A 75kW hybrid system with smart load management ensuring 24/7 power to critical areas.",
-      results: "Zero power interruptions in guest areas, 45% reduction in energy costs, improved guest satisfaction scores.",
-      testimonial: "Finally found a power solutions company that understands hospitality. Our guests never experience power issues.",
-      systemSize: "75kW",
-      image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600"
-    },
-    {
-      id: 3,
-      category: "residential",
-      title: "Private Estate, Port Harcourt",
-      client: "Family Residence",
-      challenge: "Unreliable grid power was affecting family comfort, children's studies, and increasing monthly electricity bills.",
-      approach: "Comprehensive home energy assessment and design of a family-friendly power solution.",
-      solution: "A 15kW solar system with battery backup designed for optimal home comfort and energy independence.",
-      results: "Uninterrupted power for study and family activities, 55% reduction in electricity bills.",
-      testimonial: "The kids can now study without interruption, and our bills dropped by more than half. Worth every naira!",
-      systemSize: "15kW",
-      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600"
-    },
-    {
-      id: 4,
-      category: "commercial",
-      title: "Banking Branch, Lagos",
-      client: "Commercial Bank",
-      challenge: "Critical banking operations required 100% uptime with backup systems for ATMs and core banking operations.",
-      approach: "Engineered a redundant power system with multiple backup layers for mission-critical operations.",
-      solution: "Integrated solar-battery-generator system with automatic failover and UPS backup for sensitive equipment.",
-      results: "100% uptime for banking operations, significant cost savings, enhanced customer satisfaction.",
-      testimonial: "Our branch operations are now completely reliable. Customer complaints about ATM downtime are zero.",
-      systemSize: "30kW",
-      image: "https://images.unsplash.com/photo-1541354329998-f4d9a9f9297f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600"
-    },
-    {
-      id: 5,
-      category: "industrial",
-      title: "Food Processing Plant, Kano",
-      client: "Food Manufacturing Company",
-      challenge: "Temperature-sensitive production processes required consistent power to maintain quality and prevent spoilage.",
-      approach: "Designed a robust power system with quick switchover capabilities to protect sensitive processes.",
-      solution: "80kW hybrid system with priority load management for critical refrigeration and processing equipment.",
-      results: "Zero production losses due to power issues, 40% reduction in energy costs, improved product quality consistency.",
-      testimonial: "Our product quality is now consistent, and we've eliminated costly production losses due to power failures.",
-      systemSize: "80kW",
-      image: "https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600"
-    },
-    {
-      id: 6,
-      category: "residential",
-      title: "Residential Estate, Abuja",
-      client: "Gated Community",
-      challenge: "Multiple homes in the estate needed a coordinated power solution for common areas and individual units.",
-      approach: "Community-wide power assessment and design of scalable solutions for individual homes and shared facilities.",
-      solution: "Distributed solar system with community battery storage and individual home backup systems.",
-      results: "Estate-wide power reliability, reduced common area maintenance costs, increased property values.",
-      testimonial: "Property values increased and residents are happier with reliable power throughout the estate.",
-      systemSize: "120kW",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600"
-    }
-  ];
 
   const filters = [
     { id: "all", label: "All Projects" },
@@ -142,45 +62,47 @@ export default function Portfolio() {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProjects.map((project) => (
-              <div key={project.id} className="bg-light-gray rounded-2xl overflow-hidden group hover:shadow-lg transition-shadow duration-300">
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="p-6">
-                  <Badge 
-                    variant="secondary" 
-                    className="text-sm text-accent-yellow bg-accent-yellow/10 font-semibold mb-2"
-                  >
-                    {project.category.toUpperCase()}
-                  </Badge>
-                  <h3 className="font-poppins font-bold text-xl mb-3">{project.title}</h3>
-                  <p className="text-gray-600 mb-4 line-clamp-3">{project.challenge}</p>
-                  <div className="flex justify-between items-center mb-4">
-                    <span className="text-sm text-gray-500">System Size: {project.systemSize}</span>
-                    <span className="text-sm font-semibold text-primary-blue">{project.client}</span>
-                  </div>
-                  
-                  {/* Expandable Details */}
-                  <div className="border-t pt-4 mt-4">
-                    <div className="space-y-3 text-sm">
-                      <div>
-                        <span className="font-semibold text-primary-blue">Solution:</span>
-                        <p className="text-gray-600 mt-1">{project.solution}</p>
-                      </div>
-                      <div>
-                        <span className="font-semibold text-primary-blue">Results:</span>
-                        <p className="text-gray-600 mt-1">{project.results}</p>
-                      </div>
-                      <div>
-                        <span className="font-semibold text-primary-blue">Client Testimonial:</span>
-                        <p className="text-gray-600 mt-1 italic">"{project.testimonial}"</p>
+              <Link href={`/portfolio/${project.slug}`}>
+                <div key={project.id} className="bg-light-gray rounded-2xl overflow-hidden group hover:shadow-lg transition-shadow duration-300 cursor-pointer">
+                  <img 
+                    src={project.image} 
+                    alt={`${project.title} - ${project.client} - ${project.category} project in Nigeria`} 
+                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="p-6">
+                    <Badge 
+                      variant="secondary" 
+                      className="text-sm text-accent-yellow bg-accent-yellow/10 font-semibold mb-2"
+                    >
+                      {project.category.toUpperCase()}
+                    </Badge>
+                    <h3 className="font-poppins font-bold text-xl mb-3">{project.title}</h3>
+                    <p className="text-gray-600 mb-4 line-clamp-3">{project.challenge}</p>
+                    <div className="flex justify-between items-center mb-4">
+                      <span className="text-sm text-gray-500">System Size: {project.systemSize}</span>
+                      <span className="text-sm font-semibold text-primary-blue">{project.client}</span>
+                    </div>
+                    
+                    {/* Expandable Details */}
+                    <div className="border-t pt-4 mt-4">
+                      <div className="space-y-3 text-sm">
+                        <div>
+                          <span className="font-semibold text-primary-blue">Solution:</span>
+                          <p className="text-gray-600 mt-1">{project.solution}</p>
+                        </div>
+                        <div>
+                          <span className="font-semibold text-primary-blue">Results:</span>
+                          <p className="text-gray-600 mt-1">{project.results}</p>
+                        </div>
+                        <div>
+                          <span className="font-semibold text-primary-blue">Client Testimonial:</span>
+                          <p className="text-gray-600 mt-1 italic">"{project.testimonial}"</p>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

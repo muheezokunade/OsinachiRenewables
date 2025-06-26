@@ -14,8 +14,8 @@ export default function About() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <img 
-              src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
-              alt="Osinachi engineering team" 
+              src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=compress&w=800&h=600&fit=crop" 
+              alt="Solar installation in Nigerian setting - African energy landscape" 
               className="rounded-2xl shadow-lg w-full h-auto"
             />
           </div>
