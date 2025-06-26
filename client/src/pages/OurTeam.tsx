@@ -40,7 +40,7 @@ const OurTeam: React.FC = () => {
     {
       name: "Muheez Okunade",
       role: "Tech Lead",
-      image: "/team/muheez-okunade.jpg",
+      image: "https://media.licdn.com/dms/image/v2/D4D03AQFajvRDr0yh6A/profile-displayphoto-shrink_400_400/B4DZaqPGA1HABk-/0/1746612808864?e=1756339200&v=beta&t=N5W8trJaVntFk9cdepztrv4f2cK7hZKlap6k7cDfUko",
       bio: "Experienced technology leader specializing in full-stack development and system architecture. Leads our technical team in building innovative energy solutions.",
       expertise: ["Full-Stack Development", "System Architecture", "Team Leadership"],
       linkedin: "https://www.linkedin.com/in/muheez-okunade/"
