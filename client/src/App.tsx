@@ -7,6 +7,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { useEffect } from "react";
 import { initGA } from "./lib/analytics";
 import { useAnalytics } from "./hooks/use-analytics";
+import CookieConsent from "@/components/CookieConsent";
 
 import Home from "@/pages/Home";
 import About from "@/pages/About";
@@ -18,6 +19,7 @@ import Careers from "@/pages/Careers";
 import NewsBlog from "@/pages/NewsBlog";
 import Impact from "@/pages/Impact";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
+import CookiesPolicy from "@/pages/CookiesPolicy";
 import NotFound from "@/pages/not-found";
 import PortfolioProject from "@/pages/PortfolioProject";
 
@@ -37,6 +39,7 @@ function Router() {
       <Route path="/newsblog" component={NewsBlog} />
       <Route path="/impact" component={Impact} />
       <Route path="/privacy-policy" component={PrivacyPolicy} />
+      <Route path="/cookies-policy" component={CookiesPolicy} />
       <Route path="/portfolio/:slug" component={PortfolioProject} />
       <Route component={NotFound} />
     </Switch>
@@ -59,6 +62,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           <Router />
+          <CookieConsent />
           <Toaster />
         </TooltipProvider>
       </QueryClientProvider>
