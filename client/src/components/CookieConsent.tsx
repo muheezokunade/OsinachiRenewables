@@ -52,63 +52,75 @@ export default function CookieConsent() {
   }, []);
 
   const handleAcceptAll = () => {
+    const allAccepted = {
+      essential: true,
+      analytics: true,
+      functionality: true,
+      marketing: true,
+    };
+    
+    localStorage.setItem('cookie-consent', JSON.stringify(allAccepted));
+    localStorage.setItem('cookie-consent-date', new Date().toISOString());
+    
+    // Start exit animation
     setIsAnimating(false);
+    
+    // Hide after animation completes
     setTimeout(() => {
-      const allAccepted = {
-        essential: true,
-        analytics: true,
-        functionality: true,
-        marketing: true,
-      };
-      
-      localStorage.setItem('cookie-consent', JSON.stringify(allAccepted));
-      localStorage.setItem('cookie-consent-date', new Date().toISOString());
       setIsVisible(false);
-      
-      toast({
-        title: "Preferences saved",
-        description: "All cookies have been enabled for the best experience.",
-        duration: 3000,
-      });
     }, 300);
+    
+    toast({
+      title: "Preferences saved",
+      description: "All cookies have been enabled for the best experience.",
+      duration: 3000,
+    });
   };
 
   const handleAcceptSelected = () => {
+    localStorage.setItem('cookie-consent', JSON.stringify(preferences));
+    localStorage.setItem('cookie-consent-date', new Date().toISOString());
+    
+    // Start exit animation
     setIsAnimating(false);
+    setShowSettings(false);
+    
+    // Hide after animation completes
     setTimeout(() => {
-      localStorage.setItem('cookie-consent', JSON.stringify(preferences));
-      localStorage.setItem('cookie-consent-date', new Date().toISOString());
       setIsVisible(false);
-      setShowSettings(false);
-      
-      toast({
-        title: "Preferences saved",
-        description: "Your cookie preferences have been updated.",
-        duration: 3000,
-      });
     }, 300);
+    
+    toast({
+      title: "Preferences saved",
+      description: "Your cookie preferences have been updated.",
+      duration: 3000,
+    });
   };
 
   const handleRejectAll = () => {
+    const minimalConsent = {
+      essential: true, // Essential cookies cannot be disabled
+      analytics: false,
+      functionality: false,
+      marketing: false,
+    };
+    
+    localStorage.setItem('cookie-consent', JSON.stringify(minimalConsent));
+    localStorage.setItem('cookie-consent-date', new Date().toISOString());
+    
+    // Start exit animation
     setIsAnimating(false);
+    
+    // Hide after animation completes
     setTimeout(() => {
-      const minimalConsent = {
-        essential: true, // Essential cookies cannot be disabled
-        analytics: false,
-        functionality: false,
-        marketing: false,
-      };
-      
-      localStorage.setItem('cookie-consent', JSON.stringify(minimalConsent));
-      localStorage.setItem('cookie-consent-date', new Date().toISOString());
       setIsVisible(false);
-      
-      toast({
-        title: "Preferences saved",
-        description: "Only essential cookies are enabled. Some features may be limited.",
-        duration: 3000,
-      });
     }, 300);
+    
+    toast({
+      title: "Preferences saved",
+      description: "Only essential cookies are enabled. Some features may be limited.",
+      duration: 3000,
+    });
   };
 
   const handlePreferenceChange = (type: keyof CookiePreferences, value: boolean) => {
@@ -117,8 +129,13 @@ export default function CookieConsent() {
   };
 
   const handleClose = () => {
+    // Start exit animation
     setIsAnimating(false);
-    setTimeout(() => setIsVisible(false), 300);
+    
+    // Hide after animation completes
+    setTimeout(() => {
+      setIsVisible(false);
+    }, 300);
   };
 
   if (!isVisible) return null;
