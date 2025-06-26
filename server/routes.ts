@@ -22,6 +22,37 @@ const sanitizeInput = (req: any, res: any, next: any) => {
   next();
 };
 
+// Authentication middleware for admin endpoints
+const authenticateAdmin = (req: any, res: any, next: any) => {
+  const authHeader = req.headers.authorization;
+  
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ 
+      success: false, 
+      message: "Authentication required" 
+    });
+  }
+  
+  const token = authHeader.substring(7);
+  const expectedToken = process.env.ADMIN_TOKEN;
+  
+  if (!expectedToken) {
+    return res.status(500).json({ 
+      success: false, 
+      message: "Server configuration error" 
+    });
+  }
+  
+  if (token !== expectedToken) {
+    return res.status(401).json({ 
+      success: false, 
+      message: "Invalid authentication token" 
+    });
+  }
+  
+  next();
+};
+
 // Serve sitemap.xml
 router.get('/sitemap.xml', (req, res) => {
   res.header('Content-Type', 'application/xml');
@@ -104,8 +135,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Get contact submissions (for admin purposes) - add authentication in production
-  app.get("/api/contact-submissions", async (req, res) => {
+  // Get contact submissions (protected admin endpoint)
+  app.get("/api/contact-submissions", authenticateAdmin, async (req, res) => {
     try {
       const submissions = await storage.getContactSubmissions();
       res.json(submissions);
