@@ -106,8 +106,7 @@ export default function Hero() {
               >
                 <Button
                   size="lg"
-                  variant="outline"
-                  className="border-2 border-white text-white hover:bg-primary-blue hover:text-accent-yellow font-semibold text-lg px-8 py-6 transition-all duration-300"
+                  className="bg-primary-blue text-white hover:bg-primary-blue/90 font-semibold text-lg px-8 py-6 transition-all duration-300"
                   onClick={handleViewWorkClick}
                 >
                   View Our Work
