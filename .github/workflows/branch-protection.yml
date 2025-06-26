@@ -1,0 +1,280 @@
+name: Branch Protection
+
+on:
+  pull_request:
+    branches: [main, develop]
+    types: [opened, synchronize, reopened]
+
+jobs:
+  # Enforce conventional commits
+  commit-validation:
+    name: Validate Commit Messages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Validate commit messages
+        run: |
+          # Get all commits in the PR
+          git log --format="%H %s" origin/main..HEAD | while read commit_hash commit_message; do
+            echo "Validating commit: $commit_hash"
+            echo "Message: $commit_message"
+            
+            # Use commitlint to validate each commit
+            echo "$commit_message" | npx commitlint
+            
+            if [ $? -ne 0 ]; then
+              echo "❌ Invalid commit message format: $commit_message"
+              echo "Please follow conventional commit format: type(scope): description"
+              exit 1
+            fi
+          done
+          echo "✅ All commit messages are valid"
+
+  # Security checks for PRs
+  pr-security-check:
+    name: PR Security Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Check for secrets in PR
+        run: |
+          echo "Scanning PR changes for potential secrets..."
+
+          # Get changed files
+          CHANGED_FILES=$(git diff --name-only origin/main...HEAD)
+
+          # Scan changed files for secrets
+          for file in $CHANGED_FILES; do
+            if [ -f "$file" ]; then
+              echo "Scanning file: $file"
+              
+              # Check for potential secrets
+              if grep -E "(password|secret|key|token)\s*[=:]\s*['\"][^'\"]{8,}" "$file"; then
+                echo "❌ Potential secret found in $file"
+                exit 1
+              fi
+              
+              # Check for API keys
+              if grep -E "['\"][A-Za-z0-9]{32,}['\"]" "$file"; then
+                echo "⚠️  Potential API key found in $file - please verify"
+              fi
+            fi
+          done
+
+          echo "✅ No obvious secrets found in PR changes"
+
+      - name: Check for large files
+        run: |
+          echo "Checking for large files in PR..."
+
+          # Check for files larger than 1MB
+          LARGE_FILES=$(find . -type f -size +1M -not -path "./node_modules/*" -not -path "./.git/*")
+
+          if [ -n "$LARGE_FILES" ]; then
+            echo "❌ Large files found (>1MB):"
+            echo "$LARGE_FILES"
+            echo "Please use Git LFS for large files or optimize file sizes"
+            exit 1
+          fi
+
+          echo "✅ No large files found"
+
+      - name: Validate package.json changes
+        run: |
+          echo "Validating package.json changes..."
+
+          # Check if package.json was modified
+          if git diff --name-only origin/main...HEAD | grep -q "package.json"; then
+            echo "package.json was modified, checking for security issues..."
+            
+            # Check for suspicious scripts
+            if grep -E "(curl|wget|sh|bash|eval|exec)" package.json; then
+              echo "⚠️  Suspicious scripts found in package.json - please review"
+            fi
+            
+            # Check for new dependencies
+            NEW_DEPS=$(git diff origin/main...HEAD package.json | grep "^+" | grep -E "\"[^\"]+\":\s*\"" || true)
+            if [ -n "$NEW_DEPS" ]; then
+              echo "New dependencies added:"
+              echo "$NEW_DEPS"
+              echo "Please ensure these dependencies are from trusted sources"
+            fi
+          fi
+
+          echo "✅ package.json validation complete"
+
+  # Code quality checks
+  code-quality-check:
+    name: Code Quality Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Run linting
+        run: npm run lint
+
+      - name: Check formatting
+        run: npm run format:check
+
+      - name: Type checking
+        run: npm run type-check
+
+      - name: Run tests
+        run: npm run test:run
+
+  # Build verification
+  build-check:
+    name: Build Verification
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Build application
+        run: npm run build:netlify
+
+      - name: Verify build output
+        run: |
+          echo "Verifying build output..."
+
+          # Check if build was successful
+          if [ ! -d "client/dist" ]; then
+            echo "❌ Build output directory not found"
+            exit 1
+          fi
+
+          # Check for essential files
+          if [ ! -f "client/dist/index.html" ]; then
+            echo "❌ index.html not found in build output"
+            exit 1
+          fi
+
+          # Check build size
+          BUILD_SIZE=$(du -sh client/dist | cut -f1)
+          echo "Build size: $BUILD_SIZE"
+
+          # Warn if build is too large (>10MB)
+          BUILD_SIZE_BYTES=$(du -sb client/dist | cut -f1)
+          if [ "$BUILD_SIZE_BYTES" -gt 10485760 ]; then
+            echo "⚠️  Build size is large (>10MB): $BUILD_SIZE"
+            echo "Consider optimizing assets or implementing lazy loading"
+          fi
+
+          echo "✅ Build verification complete"
+
+  # Dependency security check
+  dependency-security:
+    name: Dependency Security
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Run security audit
+        run: |
+          echo "Running security audit..."
+
+          # Run npm audit and capture output
+          npm audit --audit-level=moderate --json > audit.json || true
+
+          # Check for high/critical vulnerabilities
+          HIGH_VULNS=$(cat audit.json | jq '.vulnerabilities | to_entries | map(select(.value.severity == "high" or .value.severity == "critical")) | length' 2>/dev/null || echo "0")
+
+          if [ "$HIGH_VULNS" -gt 0 ]; then
+            echo "❌ Found $HIGH_VULNS high/critical vulnerabilities"
+            echo "Please run 'npm audit fix' to resolve security issues"
+            cat audit.json | jq '.vulnerabilities | to_entries | map(select(.value.severity == "high" or .value.severity == "critical"))' 2>/dev/null || echo "Error parsing audit results"
+            exit 1
+          fi
+
+          echo "✅ No high/critical vulnerabilities found"
+
+  # Final status check
+  pr-status:
+    name: PR Status Summary
+    runs-on: ubuntu-latest
+    needs:
+      [
+        commit-validation,
+        pr-security-check,
+        code-quality-check,
+        build-check,
+        dependency-security,
+      ]
+    if: always()
+    steps:
+      - name: Check all jobs status
+        run: |
+          echo "PR Status Summary:"
+          echo "=================="
+          echo "Commit Validation: ${{ needs.commit-validation.result }}"
+          echo "Security Check: ${{ needs.pr-security-check.result }}"
+          echo "Code Quality: ${{ needs.code-quality-check.result }}"
+          echo "Build Check: ${{ needs.build-check.result }}"
+          echo "Dependency Security: ${{ needs.dependency-security.result }}"
+          echo ""
+
+          if [ "${{ needs.commit-validation.result }}" = "success" ] && \
+             [ "${{ needs.pr-security-check.result }}" = "success" ] && \
+             [ "${{ needs.code-quality-check.result }}" = "success" ] && \
+             [ "${{ needs.build-check.result }}" = "success" ] && \
+             [ "${{ needs.dependency-security.result }}" = "success" ]; then
+            echo "✅ All checks passed! PR is ready for review."
+          else
+            echo "❌ Some checks failed. Please review and fix the issues."
+            exit 1
+          fi

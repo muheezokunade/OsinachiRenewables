@@ -1,161 +1,149 @@
-# Security Documentation
+# Security Policy
 
-## Security Fixes Applied
+## Supported Versions
 
-### ✅ Fixed Issues
+We actively support and provide security updates for the following versions:
 
-1. **Admin Endpoint Protection**
-   - Added authentication middleware to `/api/contact-submissions`
-   - Requires `Authorization: Bearer <token>` header
-   - Token must be set in `ADMIN_TOKEN` environment variable
+| Version | Supported          |
+| ------- | ------------------ |
+| 1.x.x   | :white_check_mark: |
+| < 1.0   | :x:                |
 
-2. **Session Security**
-   - Removed hardcoded session secret
-   - Auto-generates secure session secret if not provided
-   - Added proper session configuration
+## Security Features
 
-3. **Enhanced Security Headers**
-   - HSTS (HTTP Strict Transport Security)
-   - X-Content-Type-Options: nosniff
-   - X-Frame-Options: DENY
-   - X-XSS-Protection: 1; mode=block
-   - Permissions-Policy restrictions
-   - Content Security Policy (CSP)
+### Implemented Security Measures
 
-4. **Input Validation & Sanitization**
-   - Enhanced input sanitization
-   - Suspicious content detection
-   - Email and phone number validation
-   - Request size monitoring
+- **Automated Security Scanning**: Daily vulnerability scans using Snyk and npm audit
+- **Secret Detection**: TruffleHog scans for exposed secrets and credentials
+- **Dependency Management**: Automated security updates via Dependabot
+- **Code Quality**: ESLint security rules and TypeScript strict mode
+- **Content Security Policy**: Comprehensive CSP headers
+- **Security Headers**: HSTS, X-Frame-Options, X-Content-Type-Options, etc.
+- **Input Validation**: Zod schema validation for all user inputs
+- **Session Security**: Secure session configuration with httpOnly cookies
+- **Rate Limiting**: API endpoint protection against abuse
+- **HTTPS Enforcement**: All traffic encrypted in transit
 
-5. **Performance & Security**
-   - Implemented code splitting (reduced main bundle from 746KB to 425KB)
-   - Added manual chunk configuration
-   - Improved error handling
-   - Request logging for monitoring
+### CI/CD Security Pipeline
 
-6. **Dependency Updates**
-   - Updated Vite to v7.0.0 (security patches)
-   - Updated Drizzle Kit to v0.31.3
-   - Removed deprecated packages
+Our CI/CD pipeline includes multiple security checkpoints:
 
-### ⚠️ Remaining Vulnerabilities
+1. **Pre-commit Hooks**: Code formatting and basic security checks
+2. **Security Scanning**: Vulnerability detection in dependencies
+3. **Code Analysis**: Static analysis for security issues
+4. **Secret Detection**: Scanning for accidentally committed secrets
+5. **License Compliance**: Ensuring no problematic licenses
+6. **Build Security**: Scanning build output for sensitive data
+7. **Post-deployment**: Security verification of deployed application
 
-1. **esbuild Dependency** (Moderate)
-   - Nested in development dependencies
-   - Only affects development server
-   - **Impact**: Development only, not production
-   - **Mitigation**: Restrict development server access
+## Reporting a Vulnerability
 
-## Environment Setup
+We take security vulnerabilities seriously. If you discover a security issue, please follow these
+steps:
 
-### Required Environment Variables
+### 1. **DO NOT** create a public GitHub issue
 
-```bash
-# Generate secure keys using:
-# node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+Security vulnerabilities should be reported privately to avoid potential exploitation.
 
-SESSION_SECRET=<32-character-hex-string>
-ADMIN_TOKEN=<32-character-hex-string>
-```
+### 2. Report via Email
 
-### Development Setup
+Send details to: **security@osinachienergy.com**
 
-1. Copy `env.example` to `.env`
-2. Generate secure keys:
-   ```bash
-   node -e "console.log('SESSION_SECRET=' + require('crypto').randomBytes(32).toString('hex'))"
-   node -e "console.log('ADMIN_TOKEN=' + require('crypto').randomBytes(32).toString('hex'))"
-   ```
-3. Add the generated keys to your `.env` file
+Include the following information:
 
-### Production Setup
+- Description of the vulnerability
+- Steps to reproduce the issue
+- Potential impact assessment
+- Any suggested fixes (if available)
 
-1. Use environment-specific secure key management
-2. Never commit secrets to version control
-3. Rotate secrets regularly
-4. Use strong, randomly generated values
-5. Set `NODE_ENV=production`
+### 3. What to Expect
 
-## API Security
+- **Acknowledgment**: We'll acknowledge receipt within 24 hours
+- **Initial Assessment**: Initial vulnerability assessment within 72 hours
+- **Regular Updates**: Progress updates every 7 days until resolution
+- **Resolution Timeline**: We aim to resolve critical issues within 30 days
 
-### Protected Endpoints
+### 4. Severity Classification
 
-- `GET /api/contact-submissions` - Requires admin authentication
+We classify vulnerabilities using the following criteria:
 
-### Usage Example
+| Severity     | Description                                     | Response Time |
+| ------------ | ----------------------------------------------- | ------------- |
+| **Critical** | Remote code execution, data breach              | 24 hours      |
+| **High**     | Privilege escalation, significant data exposure | 72 hours      |
+| **Medium**   | Limited data exposure, denial of service        | 7 days        |
+| **Low**      | Information disclosure, minor security issues   | 30 days       |
 
-```bash
-# Access admin endpoint
-curl -H "Authorization: Bearer your-admin-token" \
-     http://localhost:3000/api/contact-submissions
-```
+## Security Best Practices for Contributors
 
-## Security Best Practices
+### Code Security Guidelines
 
-### Development
-- Use localhost binding (127.0.0.1) for development server
-- Enable source maps for debugging
-- Monitor request sizes and suspicious patterns
+1. **Input Validation**: Always validate and sanitize user inputs
+2. **Authentication**: Use secure authentication mechanisms
+3. **Authorization**: Implement proper access controls
+4. **Error Handling**: Don't expose sensitive information in error messages
+5. **Logging**: Log security events but avoid logging sensitive data
+6. **Dependencies**: Keep dependencies updated and scan for vulnerabilities
 
-### Production
-- Set secure environment variables
-- Enable HTTPS with proper certificates
-- Use secure session configuration
-- Monitor and log security events
-- Regular security audits and updates
+### Environment Security
 
-### Monitoring
-- Request logging is enabled
-- Large request detection (>1MB)
-- Error tracking and reporting
-- IP-based rate limiting
+1. **Secrets Management**: Never commit secrets to version control
+2. **Environment Variables**: Use environment variables for configuration
+3. **Database Security**: Use parameterized queries to prevent SQL injection
+4. **File Uploads**: Validate and sanitize file uploads
+5. **CORS Configuration**: Configure CORS policies appropriately
 
-## Security Headers
+### Development Security Checklist
 
-The following security headers are automatically applied:
+Before submitting code, ensure:
 
-```
-Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
-X-Content-Type-Options: nosniff
-X-Frame-Options: DENY
-X-XSS-Protection: 1; mode=block
-Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
-```
+- [ ] No hardcoded secrets or credentials
+- [ ] Input validation implemented for all user inputs
+- [ ] Error messages don't expose sensitive information
+- [ ] Dependencies are up to date and secure
+- [ ] Security tests are included where appropriate
+- [ ] Code follows security best practices
 
-## Rate Limiting
+## Security Tools and Resources
 
-- **Development**: 100 requests per 15 minutes per IP
-- **Production**: 50 requests per 15 minutes per IP
-- Applied to all `/api/*` endpoints
+### Automated Security Tools
 
-## Content Security Policy
+- **Snyk**: Vulnerability scanning for dependencies
+- **TruffleHog**: Secret detection in code and git history
+- **ESLint Security Plugin**: Static analysis for security issues
+- **npm audit**: Built-in npm vulnerability scanner
+- **Dependabot**: Automated dependency updates
 
-Configured to allow:
-- Self-hosted resources
-- Google Fonts
-- Google Analytics
-- Inline styles (for CSS-in-JS)
-- Data URLs for images
+### Security Resources
 
-## Vulnerability Reporting
+- [OWASP Top 10](https://owasp.org/www-project-top-ten/)
+- [Node.js Security Best Practices](https://nodejs.org/en/docs/guides/security/)
+- [React Security Best Practices](https://snyk.io/blog/10-react-security-best-practices/)
+- [TypeScript Security Guidelines](https://www.typescriptlang.org/docs/handbook/security.html)
 
-If you discover a security vulnerability, please:
-1. Do not create a public issue
-2. Contact the development team directly
-3. Provide detailed information about the vulnerability
-4. Allow time for the issue to be addressed before disclosure
+## Incident Response
 
-## Security Checklist
+In case of a security incident:
 
-- [x] Admin endpoints protected
-- [x] Session security configured
-- [x] Input validation and sanitization
-- [x] Security headers implemented
-- [x] Rate limiting enabled
-- [x] Error handling improved
-- [x] Code splitting for performance
-- [x] Dependency updates applied
-- [ ] SSL/TLS certificate configured (production)
-- [ ] Database security review
-- [ ] Regular security audits scheduled 
+1. **Immediate Response**: Contain the issue and assess impact
+2. **Investigation**: Determine root cause and affected systems
+3. **Communication**: Notify affected users and stakeholders
+4. **Remediation**: Implement fixes and security improvements
+5. **Post-Incident Review**: Analyze incident and improve processes
+
+## Security Contact
+
+For security-related questions or concerns:
+
+- **Email**: security@osinachienergy.com
+- **Response Time**: Within 24 hours during business days
+- **Emergency Contact**: For critical security issues requiring immediate attention
+
+## Acknowledgments
+
+We appreciate the security research community and will acknowledge researchers who responsibly
+disclose vulnerabilities (with their permission).
+
+---
+
+**Note**: This security policy is regularly reviewed and updated. Last updated: December 2024

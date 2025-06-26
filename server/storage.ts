@@ -1,10 +1,19 @@
-import { users, contactSubmissions, type User, type InsertUser, type ContactSubmission, type InsertContactSubmission } from "@shared/schema";
+import {
+  users,
+  contactSubmissions,
+  type User,
+  type InsertUser,
+  type ContactSubmission,
+  type InsertContactSubmission,
+} from '@shared/schema';
 
 export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
-  createContactSubmission(submission: InsertContactSubmission): Promise<ContactSubmission>;
+  createContactSubmission(
+    submission: InsertContactSubmission
+  ): Promise<ContactSubmission>;
   getContactSubmissions(): Promise<ContactSubmission[]>;
 }
 
@@ -27,7 +36,7 @@ export class MemStorage implements IStorage {
 
   async getUserByUsername(username: string): Promise<User | undefined> {
     return Array.from(this.users.values()).find(
-      (user) => user.username === username,
+      user => user.username === username
     );
   }
 
@@ -38,7 +47,9 @@ export class MemStorage implements IStorage {
     return user;
   }
 
-  async createContactSubmission(insertSubmission: InsertContactSubmission): Promise<ContactSubmission> {
+  async createContactSubmission(
+    insertSubmission: InsertContactSubmission
+  ): Promise<ContactSubmission> {
     const id = this.currentSubmissionId++;
     const submission: ContactSubmission = {
       id,
@@ -47,7 +58,7 @@ export class MemStorage implements IStorage {
       phone: insertSubmission.phone,
       service: insertSubmission.service || null,
       message: insertSubmission.message,
-      createdAt: new Date()
+      createdAt: new Date(),
     };
     this.contactSubmissions.set(id, submission);
     return submission;

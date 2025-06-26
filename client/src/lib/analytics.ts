@@ -44,12 +44,17 @@ export const trackPageView = (url: string, title?: string) => {
 };
 
 // Track events
-export const trackEvent = (action: string, category: string, label?: string, value?: number) => {
+export const trackEvent = (
+  action: string,
+  category: string,
+  label?: string,
+  value?: number
+) => {
   if (typeof window !== 'undefined' && window.gtag && GA_MEASUREMENT_ID) {
     window.gtag('event', action, {
       event_category: category,
       event_label: label,
-      value: value,
+      value,
     });
   }
 };

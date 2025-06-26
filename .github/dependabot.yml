@@ -1,0 +1,76 @@
+version: 2
+updates:
+  # Enable version updates for npm
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+      time: '09:00'
+    open-pull-requests-limit: 10
+    reviewers:
+      - 'muheezokunade'
+    assignees:
+      - 'muheezokunade'
+    commit-message:
+      prefix: 'deps'
+      prefix-development: 'deps-dev'
+      include: 'scope'
+    labels:
+      - 'dependencies'
+      - 'automated'
+    # Security updates
+    allow:
+      - dependency-type: 'direct'
+        update-type: 'security'
+      - dependency-type: 'indirect'
+        update-type: 'security'
+      - dependency-type: 'direct'
+        update-type: 'version-update:semver-patch'
+      - dependency-type: 'direct'
+        update-type: 'version-update:semver-minor'
+    # Ignore major version updates for stability
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
+    # Group related dependencies
+    groups:
+      react:
+        patterns:
+          - 'react*'
+          - '@types/react*'
+      radix-ui:
+        patterns:
+          - '@radix-ui/*'
+      testing:
+        patterns:
+          - '@testing-library/*'
+          - 'vitest*'
+          - 'jest*'
+      typescript:
+        patterns:
+          - 'typescript'
+          - '@types/*'
+      eslint:
+        patterns:
+          - 'eslint*'
+          - '@typescript-eslint/*'
+
+  # Enable version updates for GitHub Actions
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+      time: '09:00'
+    open-pull-requests-limit: 5
+    reviewers:
+      - 'muheezokunade'
+    assignees:
+      - 'muheezokunade'
+    commit-message:
+      prefix: 'ci'
+      include: 'scope'
+    labels:
+      - 'ci/cd'
+      - 'automated'

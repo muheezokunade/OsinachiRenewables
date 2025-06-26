@@ -3,8 +3,14 @@ import crypto from 'crypto';
 
 // Environment variable validation schema
 const envSchema = z.object({
-  NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
-  PORT: z.string().transform(Number).pipe(z.number().min(1).max(65535)).default('3000'),
+  NODE_ENV: z
+    .enum(['development', 'production', 'test'])
+    .default('development'),
+  PORT: z
+    .string()
+    .transform(Number)
+    .pipe(z.number().min(1).max(65535))
+    .default('3000'),
   DATABASE_URL: z.string().optional(),
   SESSION_SECRET: z.string().min(32).optional(),
   ADMIN_TOKEN: z.string().min(32).optional(),
@@ -29,30 +35,38 @@ export const securityConfig = {
     standardHeaders: true,
     legacyHeaders: false,
   },
-  
+
   // CORS settings
   cors: {
-    origin: env.NODE_ENV === 'production' 
-      ? ['https://osinachirenewables.com', 'https://www.osinachirenewables.com']
-      : ['http://localhost:3000', 'http://127.0.0.1:3000'],
+    origin:
+      env.NODE_ENV === 'production'
+        ? [
+            'https://osinachirenewables.com',
+            'https://www.osinachirenewables.com',
+          ]
+        : ['http://localhost:3000', 'http://127.0.0.1:3000'],
     credentials: true,
   },
-  
+
   // Content Security Policy
   csp: {
     directives: {
       defaultSrc: ["'self'"],
-      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-      fontSrc: ["'self'", "https://fonts.gstatic.com"],
-      imgSrc: ["'self'", "data:", "https:", "blob:"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "https://www.googletagmanager.com"],
-      connectSrc: ["'self'", "https://www.google-analytics.com"],
+      styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
+      fontSrc: ["'self'", 'https://fonts.gstatic.com'],
+      imgSrc: ["'self'", 'data:', 'https:', 'blob:'],
+      scriptSrc: [
+        "'self'",
+        "'unsafe-inline'",
+        'https://www.googletagmanager.com',
+      ],
+      connectSrc: ["'self'", 'https://www.google-analytics.com'],
       frameSrc: ["'none'"],
       objectSrc: ["'none'"],
       upgradeInsecureRequests: [],
     },
   },
-  
+
   // Session configuration
   session: {
     secret: env.SESSION_SECRET || generateSecureSecret(),
@@ -65,9 +79,9 @@ export const securityConfig = {
       sameSite: 'strict' as const,
     },
   },
-  
+
   // Admin authentication
   adminToken: env.ADMIN_TOKEN || generateSecureSecret(),
 };
 
-export { env }; 
+export { env };

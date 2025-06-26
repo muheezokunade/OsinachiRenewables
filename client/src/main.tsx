@@ -1,8 +1,11 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
-import { registerServiceWorker, setupNetworkListeners } from './lib/service-worker'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.tsx';
+import './index.css';
+import {
+  registerServiceWorker,
+  setupNetworkListeners,
+} from './lib/service-worker';
 
 // Register service worker for caching and offline support
 registerServiceWorker();
@@ -22,5 +25,5 @@ setupNetworkListeners(
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
-)
+  </React.StrictMode>
+);

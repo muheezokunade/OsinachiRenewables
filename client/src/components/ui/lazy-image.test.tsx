@@ -14,7 +14,7 @@ beforeEach(() => {
   mockObserve.mockClear();
   mockDisconnect.mockClear();
 
-  mockIntersectionObserver.mockImplementation((callback) => {
+  mockIntersectionObserver.mockImplementation(callback => {
     return {
       observe: mockObserve,
       disconnect: mockDisconnect,
@@ -29,9 +29,9 @@ describe('LazyImage', () => {
   it('renders placeholder initially', () => {
     render(
       <LazyImage
-        src="https://example.com/image.jpg"
-        alt="Test image"
-        className="w-full h-64"
+        src='https://example.com/image.jpg'
+        alt='Test image'
+        className='w-full h-64'
       />
     );
 
@@ -42,12 +42,7 @@ describe('LazyImage', () => {
   });
 
   it('sets up intersection observer', () => {
-    render(
-      <LazyImage
-        src="https://example.com/image.jpg"
-        alt="Test image"
-      />
-    );
+    render(<LazyImage src='https://example.com/image.jpg' alt='Test image' />);
 
     expect(mockIntersectionObserver).toHaveBeenCalledTimes(1);
     expect(mockObserve).toHaveBeenCalledTimes(1);
@@ -56,7 +51,7 @@ describe('LazyImage', () => {
   it('loads actual image when in view', async () => {
     let intersectionCallback: ((entries: any[]) => void) | undefined;
 
-    mockIntersectionObserver.mockImplementation((callback) => {
+    mockIntersectionObserver.mockImplementation(callback => {
       intersectionCallback = callback;
       return {
         observe: mockObserve,
@@ -65,12 +60,7 @@ describe('LazyImage', () => {
       };
     });
 
-    render(
-      <LazyImage
-        src="https://example.com/image.jpg"
-        alt="Test image"
-      />
-    );
+    render(<LazyImage src='https://example.com/image.jpg' alt='Test image' />);
 
     // Simulate intersection
     if (intersectionCallback) {
@@ -87,7 +77,7 @@ describe('LazyImage', () => {
   it('shows loading indicator when image is loading', async () => {
     let intersectionCallback: ((entries: any[]) => void) | undefined;
 
-    mockIntersectionObserver.mockImplementation((callback) => {
+    mockIntersectionObserver.mockImplementation(callback => {
       intersectionCallback = callback;
       return {
         observe: mockObserve,
@@ -96,12 +86,7 @@ describe('LazyImage', () => {
       };
     });
 
-    render(
-      <LazyImage
-        src="https://example.com/image.jpg"
-        alt="Test image"
-      />
-    );
+    render(<LazyImage src='https://example.com/image.jpg' alt='Test image' />);
 
     // Simulate intersection
     if (intersectionCallback) {
@@ -118,7 +103,7 @@ describe('LazyImage', () => {
   it('shows error state when image fails to load', async () => {
     let intersectionCallback: ((entries: any[]) => void) | undefined;
 
-    mockIntersectionObserver.mockImplementation((callback) => {
+    mockIntersectionObserver.mockImplementation(callback => {
       intersectionCallback = callback;
       return {
         observe: mockObserve,
@@ -128,10 +113,7 @@ describe('LazyImage', () => {
     });
 
     render(
-      <LazyImage
-        src="https://example.com/broken-image.jpg"
-        alt="Test image"
-      />
+      <LazyImage src='https://example.com/broken-image.jpg' alt='Test image' />
     );
 
     // Simulate intersection
@@ -157,7 +139,7 @@ describe('LazyImage', () => {
     const onLoadMock = vi.fn();
     let intersectionCallback: ((entries: any[]) => void) | undefined;
 
-    mockIntersectionObserver.mockImplementation((callback) => {
+    mockIntersectionObserver.mockImplementation(callback => {
       intersectionCallback = callback;
       return {
         observe: mockObserve,
@@ -168,8 +150,8 @@ describe('LazyImage', () => {
 
     render(
       <LazyImage
-        src="https://example.com/image.jpg"
-        alt="Test image"
+        src='https://example.com/image.jpg'
+        alt='Test image'
         onLoad={onLoadMock}
       />
     );
@@ -193,11 +175,11 @@ describe('LazyImage', () => {
 
   it('applies custom className', () => {
     const customClass = 'custom-image-class';
-    
+
     render(
       <LazyImage
-        src="https://example.com/image.jpg"
-        alt="Test image"
+        src='https://example.com/image.jpg'
+        alt='Test image'
         className={customClass}
       />
     );
@@ -212,8 +194,8 @@ describe('LazyImage', () => {
 
     render(
       <LazyImage
-        src="https://example.com/image.jpg"
-        alt="Test image"
+        src='https://example.com/image.jpg'
+        alt='Test image'
         threshold={customThreshold}
         rootMargin={customRootMargin}
       />
@@ -227,4 +209,4 @@ describe('LazyImage', () => {
       }
     );
   });
-}); 
+});

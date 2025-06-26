@@ -25,7 +25,7 @@
   --destructive-foreground: hsl(60, 9.1%, 97.8%);
   --ring: hsl(20, 14.3%, 4.1%);
   --radius: 0.5rem;
-  
+
   /* Custom Osinachi brand colors */
   --primary-blue: hsl(207, 100%, 18%);
   --accent-yellow: hsl(51, 100%, 50%);
@@ -64,7 +64,12 @@
     font-family: 'Inter', sans-serif;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: 'Poppins', sans-serif;
   }
 }
@@ -73,39 +78,39 @@
   .font-poppins {
     font-family: 'Poppins', sans-serif;
   }
-  
+
   .font-inter {
     font-family: 'Inter', sans-serif;
   }
-  
+
   .bg-primary-blue {
     background-color: var(--primary-blue);
   }
-  
+
   .text-primary-blue {
     color: var(--primary-blue);
   }
-  
+
   .bg-accent-yellow {
     background-color: var(--accent-yellow);
   }
-  
+
   .text-accent-yellow {
     color: var(--accent-yellow);
   }
-  
+
   .bg-light-gray {
     background-color: var(--light-gray);
   }
-  
+
   .border-primary-blue {
     border-color: var(--primary-blue);
   }
-  
+
   .hover\:bg-accent-yellow:hover {
     background-color: hsl(45, 100%, 47%);
   }
-  
+
   .hover\:bg-primary-blue:hover {
     background-color: hsl(207, 100%, 15%);
   }

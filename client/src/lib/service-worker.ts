@@ -9,43 +9,47 @@ declare global {
   }
 }
 
-export const registerServiceWorker = async (): Promise<ServiceWorkerRegistration | null> => {
-  if ('serviceWorker' in navigator && import.meta.env.PROD) {
-    try {
-      const registration = await navigator.serviceWorker.register('/sw.js', {
-        scope: '/',
-        updateViaCache: 'none'
-      });
+export const registerServiceWorker =
+  async (): Promise<ServiceWorkerRegistration | null> => {
+    if ('serviceWorker' in navigator && import.meta.env.PROD) {
+      try {
+        const registration = await navigator.serviceWorker.register('/sw.js', {
+          scope: '/',
+          updateViaCache: 'none',
+        });
 
-      // Handle service worker updates
-      registration.addEventListener('updatefound', () => {
-        const newWorker = registration.installing;
-        if (newWorker) {
-          newWorker.addEventListener('statechange', () => {
-            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-              // New service worker is available
-              showUpdateNotification();
-            }
-          });
-        }
-      });
+        // Handle service worker updates
+        registration.addEventListener('updatefound', () => {
+          const newWorker = registration.installing;
+          if (newWorker) {
+            newWorker.addEventListener('statechange', () => {
+              if (
+                newWorker.state === 'installed' &&
+                navigator.serviceWorker.controller
+              ) {
+                // New service worker is available
+                showUpdateNotification();
+              }
+            });
+          }
+        });
 
-      // Handle service worker messages
-      navigator.serviceWorker.addEventListener('message', (event) => {
-        if (event.data && event.data.type === 'CACHE_UPDATED') {
-          console.log('Service Worker: Cache updated');
-        }
-      });
+        // Handle service worker messages
+        navigator.serviceWorker.addEventListener('message', event => {
+          if (event.data && event.data.type === 'CACHE_UPDATED') {
+            console.log('Service Worker: Cache updated');
+          }
+        });
 
-      console.log('Service Worker registered successfully');
-      return registration;
-    } catch (error) {
-      console.error('Service Worker registration failed:', error);
-      return null;
+        console.log('Service Worker registered successfully');
+        return registration;
+      } catch (error) {
+        console.error('Service Worker registration failed:', error);
+        return null;
+      }
     }
-  }
-  return null;
-};
+    return null;
+  };
 
 export const unregisterServiceWorker = async (): Promise<boolean> => {
   if ('serviceWorker' in navigator) {
@@ -115,9 +119,12 @@ export const storeOfflineData = async (data: any): Promise<void> => {
       const tx = db.transaction(['offline-forms'], 'readwrite');
       const store = tx.objectStore('offline-forms');
       await store.add({ data, timestamp: Date.now() });
-      
+
       // Register for background sync
-      if ('serviceWorker' in navigator && 'sync' in window.ServiceWorkerRegistration.prototype) {
+      if (
+        'serviceWorker' in navigator &&
+        'sync' in window.ServiceWorkerRegistration.prototype
+      ) {
         const registration = await navigator.serviceWorker.ready;
         if (registration.sync) {
           await registration.sync.register('contact-form-sync');
@@ -133,14 +140,17 @@ export const storeOfflineData = async (data: any): Promise<void> => {
 const openOfflineDB = (): Promise<IDBDatabase> => {
   return new Promise((resolve, reject) => {
     const request = indexedDB.open('OsinachiOfflineDB', 1);
-    
+
     request.onerror = () => reject(request.error);
     request.onsuccess = () => resolve(request.result);
-    
+
     request.onupgradeneeded = () => {
       const db = request.result;
       if (!db.objectStoreNames.contains('offline-forms')) {
-        db.createObjectStore('offline-forms', { keyPath: 'id', autoIncrement: true });
+        db.createObjectStore('offline-forms', {
+          keyPath: 'id',
+          autoIncrement: true,
+        });
       }
     };
   });
@@ -193,13 +203,13 @@ const showUpdateNotification = (): void => {
       </button>
     </div>
   `;
-  
+
   document.body.appendChild(notification);
-  
+
   // Auto-remove after 10 seconds
   setTimeout(() => {
     if (notification.parentElement) {
       notification.remove();
     }
   }, 10000);
-}; 
+};

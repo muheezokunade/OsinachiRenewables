@@ -1,11 +1,11 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import { fileURLToPath, URL } from "node:url";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { fileURLToPath, URL } from 'node:url';
 
 export default defineConfig({
   plugins: [
     react(),
-    ...(process.env.NODE_ENV !== "production" &&
+    ...(process.env.NODE_ENV !== 'production' &&
     process.env.REPL_ID !== undefined
       ? [
           // Add development plugins here if needed
@@ -14,13 +14,13 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      "@": fileURLToPath(new URL("./client/src", import.meta.url)),
-      "@shared": fileURLToPath(new URL("./shared", import.meta.url)),
+      '@': fileURLToPath(new URL('./client/src', import.meta.url)),
+      '@shared': fileURLToPath(new URL('./shared', import.meta.url)),
     },
   },
-  root: "client",
+  root: 'client',
   build: {
-    outDir: "dist",
+    outDir: 'dist',
     emptyOutDir: true,
     rollupOptions: {
       output: {
@@ -30,11 +30,11 @@ export default defineConfig({
           // UI component libraries
           ui: [
             '@radix-ui/react-accordion',
-            '@radix-ui/react-dialog', 
+            '@radix-ui/react-dialog',
             '@radix-ui/react-dropdown-menu',
             '@radix-ui/react-tabs',
             '@radix-ui/react-toast',
-            '@radix-ui/react-tooltip'
+            '@radix-ui/react-tooltip',
           ],
           // Routing and navigation
           routing: ['wouter'],
@@ -47,7 +47,7 @@ export default defineConfig({
           // Charts and data visualization
           charts: ['recharts', 'embla-carousel-react'],
           // Animation libraries
-          animation: ['framer-motion']
+          animation: ['framer-motion'],
         },
       },
     },
@@ -68,17 +68,13 @@ export default defineConfig({
   // Security: Configure environment variables
   define: {
     // Ensure environment variables are properly defined
-    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+    'process.env.NODE_ENV': JSON.stringify(
+      process.env.NODE_ENV || 'development'
+    ),
   },
   // Optimize dependencies
   optimizeDeps: {
-    include: [
-      'react',
-      'react-dom',
-      'wouter',
-      'clsx',
-      'tailwind-merge'
-    ],
-    exclude: ['@vite/client', '@vite/env']
+    include: ['react', 'react-dom', 'wouter', 'clsx', 'tailwind-merge'],
+    exclude: ['@vite/client', '@vite/env'],
   },
 });
