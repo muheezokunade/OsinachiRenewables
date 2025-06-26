@@ -95,11 +95,17 @@ export default function Footer() {
             © 2024 Osinachi Renewable Energy. All rights reserved.
           </div>
           <div className="flex space-x-6 text-sm">
-            {legal.map((item, index) => (
-              <a key={index} href="#" className="text-gray-300 hover:text-accent-yellow transition duration-300">
-                {item}
-              </a>
-            ))}
+            <Link href="/privacy-policy">
+              <span className="text-gray-300 hover:text-accent-yellow transition duration-300">
+                Privacy Policy
+              </span>
+            </Link>
+            <a href="#" className="text-gray-300 hover:text-accent-yellow transition duration-300">
+              Terms & Conditions
+            </a>
+            <a href="#" className="text-gray-300 hover:text-accent-yellow transition duration-300">
+              Cookie Policy
+            </a>
           </div>
         </div>
       </div>

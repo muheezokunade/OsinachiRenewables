@@ -55,6 +55,12 @@ export const sitemapConfig = {
       priority: 0.6,
       changefreq: 'monthly',
       lastmod: new Date().toISOString()
+    },
+    {
+      path: '/privacy-policy',
+      priority: 0.3,
+      changefreq: 'yearly',
+      lastmod: new Date().toISOString()
     }
   ]
 };

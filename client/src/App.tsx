@@ -17,6 +17,7 @@ import OurTeam from "@/pages/OurTeam";
 import Careers from "@/pages/Careers";
 import NewsBlog from "@/pages/NewsBlog";
 import Impact from "@/pages/Impact";
+import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import NotFound from "@/pages/not-found";
 import PortfolioProject from "@/pages/PortfolioProject";
 
@@ -35,6 +36,7 @@ function Router() {
       <Route path="/careers" component={Careers} />
       <Route path="/newsblog" component={NewsBlog} />
       <Route path="/impact" component={Impact} />
+      <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route path="/portfolio/:slug" component={PortfolioProject} />
       <Route component={NotFound} />
     </Switch>
