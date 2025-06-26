@@ -20,6 +20,7 @@ import NewsBlog from "@/pages/NewsBlog";
 import Impact from "@/pages/Impact";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import CookiesPolicy from "@/pages/CookiesPolicy";
+import TermsConditions from "@/pages/TermsConditions";
 import NotFound from "@/pages/not-found";
 import PortfolioProject from "@/pages/PortfolioProject";
 
@@ -40,6 +41,7 @@ function Router() {
       <Route path="/impact" component={Impact} />
       <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route path="/cookies-policy" component={CookiesPolicy} />
+      <Route path="/terms-conditions" component={TermsConditions} />
       <Route path="/portfolio/:slug" component={PortfolioProject} />
       <Route component={NotFound} />
     </Switch>

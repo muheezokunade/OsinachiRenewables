@@ -67,6 +67,12 @@ export const sitemapConfig = {
       priority: 0.3,
       changefreq: 'yearly',
       lastmod: new Date().toISOString()
+    },
+    {
+      path: '/terms-conditions',
+      priority: 0.3,
+      changefreq: 'yearly',
+      lastmod: new Date().toISOString()
     }
   ]
 };
