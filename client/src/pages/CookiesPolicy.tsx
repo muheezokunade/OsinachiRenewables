@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Mail, Shield, Settings, BarChart3, Target } from 'lucide-react';
+import { Mail, Shield, Settings, BarChart3, Target, MessageCircle } from 'lucide-react';
 
 export default function CookiesPolicy() {
   return (
@@ -192,11 +192,24 @@ export default function CookiesPolicy() {
               </CardHeader>
               <CardContent className="space-y-4 text-gray-700">
                 <p>If you have any questions or concerns about our use of cookies, please contact us at:</p>
-                <div className="flex items-center space-x-3">
-                  <Mail className="w-5 h-5 text-green-600 flex-shrink-0" />
-                  <a href="mailto:privacy@osinachienergy.com" className="text-green-600 hover:text-green-700 underline">
-                    privacy@osinachienergy.com
-                  </a>
+                <div className="space-y-3">
+                  <div className="flex items-center space-x-3">
+                    <Mail className="w-5 h-5 text-green-600 flex-shrink-0" />
+                    <a href="mailto:privacy@osinachienergy.com" className="text-green-600 hover:text-green-700 underline">
+                      privacy@osinachienergy.com
+                    </a>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <MessageCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+                    <a 
+                      href="https://wa.me/2349060033963" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-green-600 hover:text-green-700 underline"
+                    >
+                      WhatsApp Chat
+                    </a>
+                  </div>
                 </div>
               </CardContent>
             </Card>

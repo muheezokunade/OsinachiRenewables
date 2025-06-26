@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
+import { Facebook, Twitter, Linkedin, Instagram, Phone, Mail, MessageCircle } from "lucide-react";
 
 export default function Footer() {
   const services = [
@@ -38,7 +38,7 @@ export default function Footer() {
     <footer className="bg-primary-blue text-white py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-8 mb-12">
-          <div className="md:col-span-2">
+          <div className="md:col-span-1">
             <Logo />
             <p className="text-gray-300 mb-6 max-w-md">
               Nigeria's premier integrated power solutions provider. Reliable. Renewable. Responsible.
@@ -96,6 +96,35 @@ export default function Footer() {
                 );
               })}
             </ul>
+          </div>
+          
+          <div>
+            <h4 className="font-poppins font-semibold text-lg mb-4">Get In Touch</h4>
+            <div className="space-y-3">
+              <div className="flex items-center space-x-3">
+                <Phone className="h-4 w-4 text-accent-yellow flex-shrink-0" />
+                <a href="tel:+2349060033963" className="text-gray-300 hover:text-accent-yellow transition duration-300">
+                  +234 906 003 3963
+                </a>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Mail className="h-4 w-4 text-accent-yellow flex-shrink-0" />
+                <a href="mailto:info@osinachirenewables.com" className="text-gray-300 hover:text-accent-yellow transition duration-300">
+                  info@osinachirenewables.com
+                </a>
+              </div>
+              <div className="flex items-center space-x-3">
+                <MessageCircle className="h-4 w-4 text-green-400 flex-shrink-0" />
+                <a 
+                  href="https://wa.me/2349060033963" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-300 hover:text-green-400 transition duration-300"
+                >
+                  WhatsApp Chat
+                </a>
+              </div>
+            </div>
           </div>
         </div>
         

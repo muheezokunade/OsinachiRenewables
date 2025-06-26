@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { Phone, Mail, Clock } from "lucide-react";
+import { Phone, Mail, Clock, MessageCircle } from "lucide-react";
 import { insertContactSubmissionSchema, type InsertContactSubmission } from "@shared/schema";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
@@ -75,6 +75,11 @@ export default function Contact() {
       icon: Clock,
       title: "Business Hours",
       value: "Mon-Fri: 8AM-6PM, Sat: 9AM-2PM"
+    },
+    {
+      icon: MessageCircle,
+      title: "WhatsApp",
+      value: "wa.me/2349060033963"
     }
   ];
 
@@ -94,6 +99,10 @@ export default function Contact() {
             <div className="space-y-6">
               {contactInfo.map((info, index) => {
                 const IconComponent = info.icon;
+                const isPhone = info.title === "Call Us";
+                const isWhatsApp = info.title === "WhatsApp";
+                const isEmail = info.title === "Email Us";
+                
                 return (
                   <div key={index} className="flex items-center">
                     <div className="bg-accent-yellow w-12 h-12 rounded-full flex items-center justify-center mr-4">
@@ -101,7 +110,26 @@ export default function Contact() {
                     </div>
                     <div>
                       <div className="font-semibold">{info.title}</div>
-                      <div className="text-gray-600">{info.value}</div>
+                      {isPhone ? (
+                        <a href="tel:+2349060033963" className="text-primary-blue hover:text-primary-blue/80 underline">
+                          {info.value}
+                        </a>
+                      ) : isWhatsApp ? (
+                        <a 
+                          href="https://wa.me/2349060033963" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-green-600 hover:text-green-700 underline"
+                        >
+                          Chat with us
+                        </a>
+                      ) : isEmail ? (
+                        <a href="mailto:info@osinachirenewables.com" className="text-primary-blue hover:text-primary-blue/80 underline">
+                          {info.value}
+                        </a>
+                      ) : (
+                        <div className="text-gray-600">{info.value}</div>
+                      )}
                     </div>
                   </div>
                 );

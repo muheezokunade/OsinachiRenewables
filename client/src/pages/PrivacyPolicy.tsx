@@ -3,7 +3,11 @@ import { Helmet } from 'react-helmet-async';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin, MessageCircle } from 'lucide-react';
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
+import CookieConsent from "@/components/CookieConsent";
+import SEO, { SEOConfigs } from "@/components/SEO";
 
 export default function PrivacyPolicy() {
   return (
@@ -225,6 +229,21 @@ export default function PrivacyPolicy() {
                         <p className="font-medium">Phone:</p>
                         <a href="tel:+2349060033963" className="text-green-600 hover:text-green-700 underline">
                           +234 906 003 3963
+                        </a>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center space-x-3">
+                      <MessageCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+                      <div>
+                        <p className="font-medium">WhatsApp:</p>
+                        <a 
+                          href="https://wa.me/2349060033963" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-green-600 hover:text-green-700 underline"
+                        >
+                          Chat with us
                         </a>
                       </div>
                     </div>
