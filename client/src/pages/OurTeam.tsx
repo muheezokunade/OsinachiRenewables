@@ -318,7 +318,7 @@ const OurTeam: React.FC = () => {
               </Button>
             </Link>
             <Link href="/contact">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary-blue">
+              <Button size="lg" variant="outline" className="border-primary-blue text-primary-blue hover:bg-primary-blue hover:text-white">
                 Contact Us
               </Button>
             </Link>

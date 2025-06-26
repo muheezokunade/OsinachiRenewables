@@ -259,7 +259,7 @@ const Impact: React.FC = () => {
               <Button size="lg" className="bg-accent-yellow text-primary-blue hover:bg-accent-yellow/90 font-semibold">
                 View Case Studies
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary-blue">
+              <Button size="lg" variant="outline" className="border-primary-blue text-primary-blue hover:bg-primary-blue hover:text-white">
                 Learn More
               </Button>
             </div>
@@ -539,13 +539,13 @@ const Impact: React.FC = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/contact">
-              <Button size="lg" className="bg-accent-yellow text-primary-blue hover:bg-accent-yellow/90 font-semibold">
-                Get Started
+              <Button size="lg" variant="outline" className="border-primary-blue text-primary-blue hover:bg-primary-blue hover:text-white">
+                Get Started Today
               </Button>
             </Link>
             <Link href="/portfolio">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary-blue">
-                View Our Work
+              <Button size="lg" variant="outline" className="border-primary-blue text-primary-blue hover:bg-primary-blue hover:text-white">
+                View Case Studies
               </Button>
             </Link>
           </div>

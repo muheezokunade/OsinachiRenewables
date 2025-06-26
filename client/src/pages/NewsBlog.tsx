@@ -187,9 +187,11 @@ const NewsBlog: React.FC = () => {
               <Button size="lg" className="bg-accent-yellow text-primary-blue hover:bg-accent-yellow/90 font-semibold">
                 Subscribe to Newsletter
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary-blue">
-                View All Posts
-              </Button>
+              <Link href="/portfolio">
+                <Button size="lg" variant="outline" className="border-primary-blue text-primary-blue hover:bg-primary-blue hover:text-white">
+                  View Our Projects
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

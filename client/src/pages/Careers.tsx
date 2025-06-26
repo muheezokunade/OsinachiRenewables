@@ -179,7 +179,7 @@ const Careers: React.FC = () => {
               <Button size="lg" className="bg-accent-yellow text-primary-blue hover:bg-accent-yellow/90 font-semibold">
                 View Open Positions
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary-blue">
+              <Button size="lg" variant="outline" className="border-primary-blue text-primary-blue hover:bg-primary-blue hover:text-white">
                 Learn About Culture
               </Button>
             </div>
@@ -425,7 +425,7 @@ const Careers: React.FC = () => {
               </Button>
             </Link>
             <Link href="/ourteam">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary-blue">
+              <Button size="lg" variant="outline" className="border-primary-blue text-primary-blue hover:bg-primary-blue hover:text-white">
                 Meet Our Team
               </Button>
             </Link>
