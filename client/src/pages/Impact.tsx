@@ -1,15 +1,121 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { Progress } from '../components/ui/progress';
+import { Input } from '../components/ui/input';
+import { Label } from '../components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { Link } from 'wouter';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import CookieConsent from '@/components/CookieConsent';
 import SEO, { SEOConfigs } from '@/components/SEO';
+import { Calculator, TrendingUp, Leaf, Zap, DollarSign } from 'lucide-react';
 
 const Impact: React.FC = () => {
+  // Impact Calculator State
+  const [calculatorData, setCalculatorData] = useState({
+    monthlyBill: '',
+    systemSize: '',
+    location: 'Lagos'
+  });
+
+  const [calculatorResults, setCalculatorResults] = useState({
+    co2Reduction: 0,
+    energySavings: 0,
+    treesEquivalent: 0,
+    annualSavings: 0,
+    paybackPeriod: 0,
+    isCalculated: false
+  });
+
+  // System size options with their specifications
+  const systemSizes = [
+    { value: '3', label: '3 kW (Small Home)', annualGeneration: 4380, cost: 1500000 },
+    { value: '5', label: '5 kW (Medium Home)', annualGeneration: 7300, cost: 2500000 },
+    { value: '10', label: '10 kW (Large Home)', annualGeneration: 14600, cost: 4500000 },
+    { value: '20', label: '20 kW (Small Business)', annualGeneration: 29200, cost: 8500000 },
+    { value: '50', label: '50 kW (Medium Business)', annualGeneration: 73000, cost: 20000000 }
+  ];
+
+  // Calculate impact based on inputs
+  const calculateImpact = () => {
+    console.log('Calculate button clicked', calculatorData);
+    
+    if (!calculatorData.monthlyBill || !calculatorData.systemSize) {
+      console.log('Missing required data');
+      return;
+    }
+
+    const monthlyBill = parseFloat(calculatorData.monthlyBill);
+    const systemSize = systemSizes.find(size => size.value === calculatorData.systemSize);
+    
+    if (!systemSize) {
+      console.log('System size not found');
+      return;
+    }
+
+    console.log('Calculating with:', { monthlyBill, systemSize });
+
+    // Calculations based on Nigerian energy context
+    const annualBill = monthlyBill * 12;
+    const annualGeneration = systemSize.annualGeneration; // kWh
+    const systemCost = systemSize.cost;
+    
+    // CO2 reduction (Nigerian grid emits ~0.5 kg CO2/kWh)
+    const co2Reduction = (annualGeneration * 0.5) / 1000; // tons per year
+    
+    // Energy savings (assuming 80% of generated energy offsets grid consumption)
+    const energySavings = annualGeneration * 0.8; // kWh
+    
+    // Calculate annual savings based on current electricity rate
+    // Assuming average Nigerian electricity rate of ₦50/kWh
+    const electricityRate = 50; // ₦ per kWh
+    const annualSavings = energySavings * electricityRate;
+    
+    // Trees equivalent (1 tree absorbs ~22 kg CO2 per year)
+    const treesEquivalent = Math.round(co2Reduction * 1000 / 22);
+    
+    // Payback period
+    const paybackPeriod = systemCost / annualSavings;
+
+    console.log('Calculation results:', {
+      co2Reduction,
+      energySavings,
+      annualSavings,
+      treesEquivalent,
+      paybackPeriod
+    });
+
+    setCalculatorResults({
+      co2Reduction: Math.round(co2Reduction * 10) / 10,
+      energySavings: Math.round(energySavings),
+      treesEquivalent,
+      annualSavings: Math.round(annualSavings),
+      paybackPeriod: Math.round(paybackPeriod * 10) / 10,
+      isCalculated: true
+    });
+  };
+
+  // Reset calculator
+  const resetCalculator = () => {
+    setCalculatorData({
+      monthlyBill: '',
+      systemSize: '',
+      location: 'Lagos'
+    });
+    setCalculatorResults({
+      co2Reduction: 0,
+      energySavings: 0,
+      treesEquivalent: 0,
+      annualSavings: 0,
+      paybackPeriod: 0,
+      isCalculated: false
+    });
+  };
+
+  // Environmental Stats
   const environmentalStats = [
     {
       metric: "10,000+",
@@ -322,40 +428,99 @@ const Impact: React.FC = () => {
                     <input 
                       type="number" 
                       placeholder="Enter amount"
+                      value={calculatorData.monthlyBill}
+                      onChange={(e) => setCalculatorData(prev => ({ ...prev, monthlyBill: e.target.value }))}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">System Size (kW)</label>
-                    <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
-                      <option>Select system size</option>
-                      <option>3 kW (Small Home)</option>
-                      <option>5 kW (Medium Home)</option>
-                      <option>10 kW (Large Home)</option>
-                      <option>20 kW (Small Business)</option>
-                      <option>50 kW (Medium Business)</option>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">System Size</label>
+                    <select 
+                      value={calculatorData.systemSize}
+                      onChange={(e) => setCalculatorData(prev => ({ ...prev, systemSize: e.target.value }))}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    >
+                      <option value="">Select system size</option>
+                      {systemSizes.map((size) => (
+                        <option key={size.value} value={size.value}>
+                          {size.label}
+                        </option>
+                      ))}
                     </select>
                   </div>
-                  <Button className="w-full bg-green-600 hover:bg-green-700">
-                    Calculate Impact
-                  </Button>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Location</label>
+                    <select 
+                      value={calculatorData.location}
+                      onChange={(e) => setCalculatorData(prev => ({ ...prev, location: e.target.value }))}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    >
+                      <option value="Lagos">Lagos</option>
+                      <option value="Abuja">Abuja</option>
+                      <option value="Kano">Kano</option>
+                      <option value="Port Harcourt">Port Harcourt</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button 
+                      onClick={calculateImpact}
+                      className="flex-1 bg-green-600 hover:bg-green-700"
+                      disabled={!calculatorData.monthlyBill || !calculatorData.systemSize}
+                    >
+                      Calculate Impact
+                    </Button>
+                    <Button 
+                      onClick={resetCalculator}
+                      variant="outline"
+                      className="px-4"
+                    >
+                      Reset
+                    </Button>
+                  </div>
                 </div>
                 <div className="bg-green-50 p-6 rounded-lg">
                   <h3 className="font-semibold text-green-800 mb-4">Your Potential Impact:</h3>
                   <div className="space-y-3">
                     <div className="flex justify-between">
                       <span className="text-gray-600">CO2 Reduction:</span>
-                      <span className="font-semibold text-green-600">-- tons/year</span>
+                      <span className="font-semibold text-green-600">
+                        {calculatorResults.isCalculated ? `${calculatorResults.co2Reduction} tons/year` : '-- tons/year'}
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Energy Savings:</span>
-                      <span className="font-semibold text-green-600">-- ₦/year</span>
+                      <span className="font-semibold text-green-600">
+                        {calculatorResults.isCalculated ? `${calculatorResults.energySavings.toLocaleString()} kWh/year` : '-- kWh/year'}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Annual Savings:</span>
+                      <span className="font-semibold text-green-600">
+                        {calculatorResults.isCalculated ? `₦${calculatorResults.annualSavings.toLocaleString()}/year` : '₦--/year'}
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Trees Equivalent:</span>
-                      <span className="font-semibold text-green-600">-- trees</span>
+                      <span className="font-semibold text-green-600">
+                        {calculatorResults.isCalculated ? `${calculatorResults.treesEquivalent} trees` : '-- trees'}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Payback Period:</span>
+                      <span className="font-semibold text-green-600">
+                        {calculatorResults.isCalculated ? `${calculatorResults.paybackPeriod} years` : '-- years'}
+                      </span>
                     </div>
                   </div>
+                  {calculatorResults.isCalculated && (
+                    <div className="mt-4 p-3 bg-green-100 rounded-md">
+                      <p className="text-sm text-green-800">
+                        💡 <strong>Tip:</strong> These calculations are estimates based on average Nigerian conditions. 
+                        Contact us for a detailed assessment tailored to your specific needs.
+                      </p>
+                    </div>
+                  )}
                 </div>
               </div>
             </CardContent>

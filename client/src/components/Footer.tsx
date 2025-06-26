@@ -77,15 +77,24 @@ export default function Footer() {
           <div>
             <h4 className="font-poppins font-semibold text-lg mb-4">Company</h4>
             <ul className="space-y-2">
-              {company.map((item, index) => (
-                <li key={index}>
-                  <Link href={item === "About Us" ? "/about" : item === "Contact" ? "/contact" : "#"}>
-                    <span className="text-gray-300 hover:text-accent-yellow transition duration-300">
-                      {item}
-                    </span>
-                  </Link>
-                </li>
-              ))}
+              {company.map((item, index) => {
+                let href = "#";
+                if (item === "About Us") href = "/about";
+                else if (item === "Our Team") href = "/ourteam";
+                else if (item === "Careers") href = "/careers";
+                else if (item === "News & Blog") href = "/newsblog";
+                else if (item === "Contact") href = "/contact";
+                
+                return (
+                  <li key={index}>
+                    <Link href={href}>
+                      <span className="text-gray-300 hover:text-accent-yellow transition duration-300">
+                        {item}
+                      </span>
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>

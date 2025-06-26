@@ -6,8 +6,21 @@ import { z } from "zod";
 import express from 'express';
 import path from 'path';
 import { generateSitemapXML, robotsTxt } from '../client/src/utils/sitemap';
+import validator from 'validator';
 
 const router = express.Router();
+
+// Input sanitization middleware
+const sanitizeInput = (req: any, res: any, next: any) => {
+  if (req.body) {
+    Object.keys(req.body).forEach(key => {
+      if (typeof req.body[key] === 'string') {
+        req.body[key] = validator.escape(req.body[key].trim());
+      }
+    });
+  }
+  next();
+};
 
 // Serve sitemap.xml
 router.get('/sitemap.xml', (req, res) => {
@@ -22,9 +35,47 @@ router.get('/robots.txt', (req, res) => {
 });
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Contact form submission
-  app.post("/api/contact", async (req, res) => {
+  // Mount the router for sitemap and robots.txt routes
+  app.use(router);
+
+  // Contact form submission with enhanced security
+  app.post("/api/contact", sanitizeInput, async (req, res) => {
     try {
+      // Additional validation
+      const { name, email, phone, service, message } = req.body;
+      
+      // Validate email format
+      if (!validator.isEmail(email)) {
+        return res.status(400).json({ 
+          success: false, 
+          message: "Invalid email format" 
+        });
+      }
+      
+      // Validate phone number (basic Nigerian format)
+      if (phone && !validator.matches(phone, /^(\+234|0)[789][01]\d{8}$/)) {
+        return res.status(400).json({ 
+          success: false, 
+          message: "Invalid phone number format" 
+        });
+      }
+      
+      // Check for suspicious content
+      const suspiciousPatterns = [
+        /<script/i,
+        /javascript:/i,
+        /on\w+\s*=/i,
+        /data:text\/html/i
+      ];
+      
+      const allText = `${name} ${email} ${phone || ''} ${service || ''} ${message}`;
+      if (suspiciousPatterns.some(pattern => pattern.test(allText))) {
+        return res.status(400).json({ 
+          success: false, 
+          message: "Invalid content detected" 
+        });
+      }
+
       const validatedData = insertContactSubmissionSchema.parse(req.body);
       const submission = await storage.createContactSubmission(validatedData);
       
@@ -53,7 +104,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Get contact submissions (for admin purposes)
+  // Get contact submissions (for admin purposes) - add authentication in production
   app.get("/api/contact-submissions", async (req, res) => {
     try {
       const submissions = await storage.getContactSubmissions();
