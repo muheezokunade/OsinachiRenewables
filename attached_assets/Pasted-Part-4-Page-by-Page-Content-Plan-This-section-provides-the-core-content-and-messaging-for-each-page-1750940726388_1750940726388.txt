@@ -1,0 +1,91 @@
+Part 4: Page-by-Page Content Plan
+This section provides the core content and messaging for each page.
+
+4.1. Home Page
+Hero Section:
+
+Headline: Tired of Unreliable Power? Get a Solution Built to Last.
+
+Sub-headline: We combine decades of generator expertise with modern inverter and solar technology to deliver power you can trust.
+
+Call-to-Action (CTA) Button: Request a Free Consultation
+
+Pain Point Section:
+
+A small, icon-based section addressing the key frustrations: "Failing Generators?", "Fake Parts?", "Costly Repairs?", "Unstable Inverters?". This shows immediate empathy.
+
+Our Solution Section:
+
+Headline: Power You Can Trust. An Integrated Approach.
+
+Brief, visually-driven introductions to the two core service pillars:
+
+Generator Parts & Maintenance: "Keeping your essential power systems running flawlessly with genuine parts and expert service for Perkins, Caterpillar, Cummins, and Lister."
+
+Custom Inverter & Solar Systems: "Harness the sun and modern technology for uninterrupted, cost-effective power tailored to your exact needs."
+
+Key Benefits Section:
+
+Icon-based highlights: Reliable Power Supply, Reduced Long-Term Costs, Tailored Systems, Peace of Mind, Professional Support. Each benefit should have a one-sentence explanation.
+
+"Why Osinachi?" Section:
+
+Headline: We Fix the Power Struggles Others Couldn't.
+
+Feature short, powerful statements: "Authentic, High-Quality Products," "Proven Industry Expertise," "Expert Advice You Can Trust."
+
+Our Process Section:
+
+A simple 4-step visual guide: 1. Consultation & Audit -> 2. System Design -> 3. Professional Installation -> 4. Ongoing Support. This demystifies the process for potential clients.
+
+Final CTA Section:
+
+Headline: Start Your Journey to Reliable, Uninterrupted Power.
+
+CTA Button: Get a Quote
+
+4.2. About Us Page
+Our Story:
+
+Tell the narrative of the family business, its roots in the generator industry. Mention the brands you grew up servicing. Frame the expansion into renewables as a natural evolution driven by a commitment to providing the best solution for the customer, not just the traditional one.
+
+Our Mission:
+
+Use the passionate text from the presentation: "At Osinachi Renewables, we are on a mission to end the cycle of unreliable power supply in Nigeria... We are here to change that."
+
+Our Proven Results (Success Stories):
+
+Headline: Our Experience and Results.
+
+Expand on the quantifiable achievements with more context:
+
+"Over 100 Successful Deployments: From powering entire factory floors to ensuring 24/7 uptime for private residences, our team has successfully designed and installed over 100 power systems that meet and exceed client expectations."
+
+"Seamless Energy Transitions: We specialize in helping businesses transition from unstable, costly power sources to stable, predictable renewable systems, allowing them to operate with confidence."
+
+"A Reputation Built on Trust: Our commitment to technical excellence is so profound that clients begin referring others even before installations are completed. This word-of-mouth growth is the strongest testament to our quality."
+
+4.3. Services Pages
+Generator Parts & Maintenance:
+
+Headline: Expert Maintenance for Nigeria's Most Trusted Generator Brands.
+
+Detail the services for Perkins, Caterpillar, Cummins, and Lister.
+
+List specific services: Diagnostic Checks, Preventative Maintenance Schedules, Oil & Filter Changes, Engine Overhauls, Genuine Parts Sourcing & Supply.
+
+Emphasize the supply of "only authentic" parts to avoid the risk of fakes and costly damage.
+
+CTA: Schedule a Service or Request Parts.
+
+Custom Inverter & Solar Systems:
+
+Headline: Reliable Power, Tailored to You.
+
+Explain the process: Consultation -> Energy Audit -> System Design -> Professional Installation -> Commissioning -> After-Sales Support.
+
+Detail the applications: oil vessels, gas stations, banks, hotels, homes, clubs, and factories.
+
+Detail the technology: Tier-1 Solar Panels, Hybrid Inverters, Lithium-Ion Battery Banks, Smart Energy Management Systems.
+
+CTA: Design Your Custom System.

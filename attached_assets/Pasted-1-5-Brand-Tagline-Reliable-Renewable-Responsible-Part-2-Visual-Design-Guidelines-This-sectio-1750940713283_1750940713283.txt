@@ -1,0 +1,88 @@
+1.5. Brand Tagline
+Reliable. Renewable. Responsible.
+
+Part 2: Visual & Design Guidelines
+This section outlines the visual language of the brand, based on the provided logo and mood board.
+
+2.1. Logo Usage
+The primary logo (full color with text on a white or light background) should be used in the website header and in all primary brand communications.
+
+The emblem (the stylized sun/turbine) can be used as a favicon, social media profile picture, and as a standalone design element (e.g., watermark, section breaks) where space is limited.
+
+Clear Space: Always maintain a minimum clear space around the logo equal to the height of the letter "O" in "Osinachi." Do not crowd the logo with other elements.
+
+2.2. Color Palette
+Primary Blue: Deep Blue (#002A5C) - Used for headlines, footers, primary buttons, and as a background color for sections conveying trust, stability, and corporate expertise. It should be the dominant brand color.
+
+Accent Yellow: Solar Yellow (#FFD600) - Used strategically for secondary buttons, calls-to-action, icons, and highlighting key statistics or benefits. Its purpose is to draw the user's eye to important actions and signify energy and optimism.
+
+Neutral: White (#FFFFFF) & Light Gray (#F2F2F2) - Used for main page backgrounds to ensure clarity, readability, and a clean, modern aesthetic that allows the content and imagery to stand out.
+
+2.3. Typography
+Headings: A clean, bold, modern sans-serif font (e.g., Montserrat, Poppins). Use Bold (700 weight) for primary headlines (H1, H2) and Semi-Bold (600 weight) for sub-headings (H3, H4) to create a clear visual hierarchy.
+
+Body Text: A highly legible sans-serif font (e.g., Inter, Lato, Open Sans). Use Regular (400 weight) for all paragraphs. Ensure a minimum font size of 16px and a line height of at least 1.6 for optimal readability on all devices.
+
+2.4. Imagery Style
+High-quality, professional photographs that feel authentic to the Nigerian context. Avoid generic stock photos.
+
+Industrial/Commercial: Showcase the scale and complexity of your installations. Feature clean, well-organized wiring, robust mounting structures, and your team working professionally on-site.
+
+Residential: Capture the outcome—the comfort and happiness of reliable power. Show well-lit homes, children studying, and modern appliances running smoothly.
+
+Team: Feature images of the Osinachi team in branded attire, conducting energy audits, consulting with clients, or performing maintenance. This builds a human connection and reinforces your expertise.
+
+Part 3: Website Architecture & Sitemap
+This defines the structure and flow of the website.
+
+Home
+
+About Us
+
+Our Story (The Family Legacy)
+
+Our Proven Results
+
+Why Choose Us?
+
+Careers
+
+Services (Dropdown Menu)
+
+Generator Parts & Maintenance (Servicing Perkins, Caterpillar, Cummins & Lister)
+
+Custom Inverter & Solar Systems (For Homes, Businesses, Industries)
+
+Energy Audit & Consultancy
+
+IoT Monitoring & Management
+
+Industries We Serve (Dropdown or dedicated page)
+
+Banking & Finance
+
+Oil, Gas & Marine
+
+Manufacturing & Industrial
+
+Hospitality & Leisure
+
+Residential Estates
+
+Portfolio (Case Studies of Past Projects)
+
+Our Impact (ESG & Community Initiatives)
+
+Blog / News
+
+Contact Us
+
+FAQ
+
+Footer
+
+Privacy Policy
+
+Terms and Conditions
+
+404 Not Found Page

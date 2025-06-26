@@ -1,0 +1,91 @@
+4.4. Portfolio Page
+A filterable gallery of case studies (Filter by: Industrial, Commercial, Residential).
+
+Each case study should have a dedicated page with this template:
+
+Client: (e.g., "Mid-Sized Factory, Lagos")
+
+Challenge: (e.g., "High diesel costs and frequent production losses from grid failures were crippling profitability.")
+
+Our Approach: (e.g., "Our team conducted a full energy audit and designed a hybrid system to leverage their existing generator as a final backup, not a primary source.")
+
+Solution: (e.g., "A 50kW custom solar system with a 100kWh battery bank, integrated with their existing 250kVA generator.")
+
+Results: (e.g., "60% reduction in monthly diesel costs, 99.9% power uptime, and a projected ROI of 3.5 years.")
+
+Client Testimonial: A direct quote from the client.
+
+High-quality photos of the installation.
+
+4.5. Our Impact (ESG) Page
+Headline: Powering a Sustainable and Prosperous Future for Nigeria.
+
+Environmental: Detail the carbon emissions saved through your solar installations. Include a running total of "Litres of Diesel Displaced" for clients.
+
+Social: Highlight community enablement projects, local job creation, and technical training programs for youth in the communities you serve.
+
+Governance: Reiterate your commitment to integrity, transparency, and ethical business practices. Mention your warranty policies and commitment to honoring service agreements.
+
+4.6. Contact Us Page
+Contact form (Name, Email, Phone, Service of Interest, Message).
+
+Phone: +234 906 003 3963
+
+Email: info@osinachirenewables.com (Recommendation: Use a professional domain email instead of a personal Gmail for credibility.)
+
+Business Inquiries: sales@osinachirenewables.com
+
+Technical Support: support@osinachirenewables.com
+
+Physical Address (with embedded Google Map).
+
+Opening Hours.
+
+Part 5: Technical & Functional Specifications
+CMS: A user-friendly CMS (e.g., WordPress with a custom theme built on a lightweight framework) to allow the Osinachi team to easily update content. Key plugins for SEO (e.g., Yoast), forms (e.g., Gravity Forms), and security should be included.
+
+Low-Bandwidth Optimization:
+
+All images to be compressed and served in modern formats (e.g., WebP) via a Content Delivery Network (CDN).
+
+Implement lazy loading for images and videos below the fold.
+
+Minimize the use of heavy plugins, animations, and render-blocking scripts. Code must be clean, minified, and efficient.
+
+Target a Google PageSpeed Insights score of 85+ on mobile.
+
+Legal & Compliance:
+
+A cookie consent banner must be present, allowing users to accept or reject non-essential cookies.
+
+The Privacy Policy page must be clearly written and compliant with Nigeria's NDPR.
+
+Forms & Integration:
+
+All forms must have server-side validation and spam protection (e.g., Google reCAPTCHA v3).
+
+Successful form submissions must trigger an autoresponder email to the user confirming receipt.
+
+Integrate newsletter sign-up forms with Resend.
+
+Analytics:
+
+Set up Google Analytics 4 and Google Search Console. Configure goal tracking for key conversions (form submissions, quote requests).
+
+SEO:
+
+Conduct keyword research for each service and industry page. All pages must have optimized meta titles, descriptions, and header tags.
+
+Implement a Local SEO strategy, including a fully optimized Google Business Profile.
+
+An XML sitemap will be automatically generated and submitted to search engines.
+
+Responsiveness: The website must be fully responsive and tested on a wide range of devices and browsers, ensuring a flawless user experience from small mobile screens to large desktops.
+
+Security:
+
+An SSL certificate must be installed and configured correctly (HTTPS).
+
+Implement security headers and a firewall.
+
+Set up a reliable, automated daily backup solution for the website files and database.
