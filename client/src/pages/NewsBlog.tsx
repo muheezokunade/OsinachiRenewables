@@ -188,7 +188,7 @@ const NewsBlog: React.FC = () => {
                 Subscribe to Newsletter
               </Button>
               <Link href="/portfolio">
-                <Button size="lg" variant="outline" className="border-primary-blue text-primary-blue hover:bg-primary-blue hover:text-white">
+                <Button size="lg" className="bg-primary-blue text-white hover:bg-primary-blue/90 font-semibold">
                   View Our Projects
                 </Button>
               </Link>
