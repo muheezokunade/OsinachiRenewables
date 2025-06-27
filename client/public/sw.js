@@ -8,7 +8,6 @@ const STATIC_ASSETS = [
 ];
 
 const API_CACHE_NAME = 'osinachi-api-v1';
-const API_ENDPOINTS = ['/api/contact-submissions'];
 
 // Install event - cache static assets
 self.addEventListener('install', event => {

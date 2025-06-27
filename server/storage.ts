@@ -1,6 +1,4 @@
 import {
-  users,
-  contactSubmissions,
   type User,
   type InsertUser,
   type ContactSubmission,

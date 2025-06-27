@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Card,
   CardContent,
@@ -8,21 +8,11 @@ import {
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { Progress } from '../components/ui/progress';
-import { Input } from '../components/ui/input';
-import { Label } from '../components/ui/label';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '../components/ui/select';
 import { Link } from 'wouter';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import CookieConsent from '@/components/CookieConsent';
 import SEO, { SEOConfigs } from '@/components/SEO';
-import { Calculator, TrendingUp, Leaf, Zap, DollarSign } from 'lucide-react';
 
 const Impact: React.FC = () => {
   // Impact Calculator State
@@ -77,10 +67,10 @@ const Impact: React.FC = () => {
 
   // Calculate impact based on inputs
   const calculateImpact = () => {
-    console.log('Calculate button clicked', calculatorData);
+    console.warn('Calculate button clicked', calculatorData);
 
     if (!calculatorData.monthlyBill || !calculatorData.systemSize) {
-      console.log('Missing required data');
+      console.warn('Missing required data');
       return;
     }
 
@@ -90,14 +80,13 @@ const Impact: React.FC = () => {
     );
 
     if (!systemSize) {
-      console.log('System size not found');
+      console.warn('System size not found');
       return;
     }
 
-    console.log('Calculating with:', { monthlyBill, systemSize });
+    console.warn('Calculating with:', { monthlyBill, systemSize });
 
     // Calculations based on Nigerian energy context
-    const annualBill = monthlyBill * 12;
     const annualGeneration = systemSize.annualGeneration; // kWh
     const systemCost = systemSize.cost;
 
@@ -118,7 +107,7 @@ const Impact: React.FC = () => {
     // Payback period
     const paybackPeriod = systemCost / annualSavings;
 
-    console.log('Calculation results:', {
+    console.warn('Calculation results:', {
       co2Reduction,
       energySavings,
       annualSavings,

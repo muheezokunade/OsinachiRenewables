@@ -14,7 +14,6 @@ import {
   BarChart3,
   Zap,
   Target,
-  Info,
   Cookie,
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';

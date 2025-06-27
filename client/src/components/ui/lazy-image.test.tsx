@@ -14,7 +14,7 @@ beforeEach(() => {
   mockObserve.mockClear();
   mockDisconnect.mockClear();
 
-  mockIntersectionObserver.mockImplementation(callback => {
+  mockIntersectionObserver.mockImplementation(_callback => {
     return {
       observe: mockObserve,
       disconnect: mockDisconnect,
@@ -35,8 +35,8 @@ describe('LazyImage', () => {
       />
     );
 
-    // Should render placeholder
-    const placeholderImg = screen.getByRole('img', { hidden: true });
+    // Should render placeholder (using document.querySelector since it has aria-hidden)
+    const placeholderImg = document.querySelector('img[aria-hidden="true"]');
     expect(placeholderImg).toBeInTheDocument();
     expect(placeholderImg).toHaveAttribute('aria-hidden', 'true');
   });

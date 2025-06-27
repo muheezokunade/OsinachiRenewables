@@ -9,7 +9,7 @@ import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 
 export default function PortfolioProject() {
-  const [match, params] = useRoute('/portfolio/:slug');
+  const [, params] = useRoute('/portfolio/:slug');
   const project = projects.find(p => p.slug === params?.slug);
 
   if (!project) {

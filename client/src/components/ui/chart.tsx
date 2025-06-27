@@ -317,6 +317,7 @@ const ChartLegendContent = React.forwardRef<
 ChartLegendContent.displayName = 'ChartLegend';
 
 // Helper to extract item config from a payload.
+/* eslint-disable security/detect-object-injection */
 function getPayloadConfigFromPayload(
   config: ChartConfig,
   payload: unknown,
@@ -350,10 +351,13 @@ function getPayloadConfigFromPayload(
     ] as string;
   }
 
-  return configLabelKey in config
+  return Object.prototype.hasOwnProperty.call(config, configLabelKey)
     ? config[configLabelKey]
-    : config[key as keyof typeof config];
+    : Object.prototype.hasOwnProperty.call(config, key)
+      ? config[key as keyof typeof config]
+      : undefined;
 }
+/* eslint-enable security/detect-object-injection */
 
 export {
   ChartContainer,

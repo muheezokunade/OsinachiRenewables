@@ -9,7 +9,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
-import { Menu, ChevronDown } from 'lucide-react';
+import { Menu } from 'lucide-react';
 
 export default function Navigation() {
   const [location] = useLocation();

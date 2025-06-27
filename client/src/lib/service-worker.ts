@@ -37,11 +37,11 @@ export const registerServiceWorker =
         // Handle service worker messages
         navigator.serviceWorker.addEventListener('message', event => {
           if (event.data && event.data.type === 'CACHE_UPDATED') {
-            console.log('Service Worker: Cache updated');
+            console.warn('Service Worker: Cache updated');
           }
         });
 
-        console.log('Service Worker registered successfully');
+        console.warn('Service Worker registered successfully');
         return registration;
       } catch (error) {
         console.error('Service Worker registration failed:', error);
@@ -57,7 +57,7 @@ export const unregisterServiceWorker = async (): Promise<boolean> => {
       const registration = await navigator.serviceWorker.getRegistration();
       if (registration) {
         const result = await registration.unregister();
-        console.log('Service Worker unregistered:', result);
+        console.warn('Service Worker unregistered:', result);
         return result;
       }
     } catch (error) {
@@ -73,7 +73,7 @@ export const updateServiceWorker = async (): Promise<void> => {
       const registration = await navigator.serviceWorker.getRegistration();
       if (registration) {
         await registration.update();
-        console.log('Service Worker update requested');
+        console.warn('Service Worker update requested');
       }
     } catch (error) {
       console.error('Service Worker update failed:', error);
@@ -92,12 +92,12 @@ export const setupNetworkListeners = (
   onOffline?: () => void
 ): (() => void) => {
   const handleOnline = () => {
-    console.log('App is back online');
+    console.warn('App is back online');
     onOnline?.();
   };
 
   const handleOffline = () => {
-    console.log('App is offline');
+    console.warn('App is offline');
     onOffline?.();
   };
 
@@ -112,7 +112,9 @@ export const setupNetworkListeners = (
 };
 
 // Store data for offline sync
-export const storeOfflineData = async (data: any): Promise<void> => {
+export const storeOfflineData = async (
+  data: Record<string, unknown>
+): Promise<void> => {
   if ('indexedDB' in window) {
     try {
       const db = await openOfflineDB();

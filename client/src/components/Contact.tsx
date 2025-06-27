@@ -50,11 +50,14 @@ export default function Contact() {
       form.reset();
       trackEvent('form_submit', 'contact', 'success');
     },
-    onError: (error: any) => {
+    onError: (error: Error | unknown) => {
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : 'An error occurred while sending your message.';
       toast({
         title: 'Error',
-        description:
-          error.message || 'An error occurred while sending your message.',
+        description: errorMessage,
         variant: 'destructive',
       });
       trackEvent('form_submit', 'contact', 'error');

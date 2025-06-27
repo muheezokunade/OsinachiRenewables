@@ -1,6 +1,5 @@
 import { Link } from 'wouter';
 import {
-  Facebook,
   Twitter,
   Linkedin,
   Instagram,
@@ -19,8 +18,6 @@ export default function Footer() {
   ];
 
   const company = ['About Us', 'Our Team', 'Careers', 'News & Blog', 'Contact'];
-
-  const legal = ['Privacy Policy', 'Terms & Conditions', 'Cookie Policy'];
 
   const Logo = () => (
     <div className='flex items-center mb-6'>

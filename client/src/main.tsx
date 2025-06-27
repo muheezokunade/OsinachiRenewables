@@ -14,15 +14,20 @@ registerServiceWorker();
 setupNetworkListeners(
   () => {
     // Online callback
-    console.log('App is back online');
+    console.warn('App is back online');
   },
   () => {
     // Offline callback
-    console.log('App is offline');
+    console.warn('App is offline');
   }
 );
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+const rootElement = document.getElementById('root');
+if (!rootElement) {
+  throw new Error('Root element not found');
+}
+
+ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
     <App />
   </React.StrictMode>

@@ -3,10 +3,6 @@ import { Helmet } from 'react-helmet-async';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Mail, MapPin, Phone, MessageCircle } from 'lucide-react';
-import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
-import CookieConsent from '@/components/CookieConsent';
-import SEO, { SEOConfigs } from '@/components/SEO';
 
 export default function TermsConditions() {
   return (

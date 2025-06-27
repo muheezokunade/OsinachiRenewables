@@ -4,8 +4,8 @@ export const GA_MEASUREMENT_ID = 'G-V8VZXHZHPX';
 // Define the gtag function globally
 declare global {
   interface Window {
-    dataLayer: any[];
-    gtag: (...args: any[]) => void;
+    dataLayer: unknown[];
+    gtag: (...args: unknown[]) => void;
   }
 }
 
@@ -20,7 +20,7 @@ export const initGA = () => {
 
     // Initialize gtag
     window.dataLayer = window.dataLayer || [];
-    const gtag = (...args: any[]) => {
+    const gtag = (...args: unknown[]) => {
       window.dataLayer.push(args);
     };
     window.gtag = gtag;

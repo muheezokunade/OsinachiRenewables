@@ -49,7 +49,7 @@ app.use('/api/', limiter);
 app.use(
   express.json({
     limit: '10mb',
-    verify: (req: Request, res: Response, buf: Buffer, encoding: string) => {
+    verify: (req: Request, res: Response, buf: Buffer, _encoding: string) => {
       // Add request size logging for monitoring
       if (buf.length > 1000000) {
         // 1MB
@@ -101,7 +101,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 // Error handling middleware
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+app.use((err: Error, req: Request, res: Response, _next: NextFunction) => {
   console.error('Server error:', err);
 
   // Don't leak error details in production
@@ -120,7 +120,7 @@ const server = createServer(app);
 
 async function startServer() {
   try {
-    const httpServer = await registerRoutes(app);
+    await registerRoutes(app);
 
     if (process.env.NODE_ENV === 'development') {
       await setupVite(app, server);

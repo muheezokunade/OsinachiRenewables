@@ -1,6 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 
+// Default placeholder image - a simple gray rectangle SVG
+/* eslint-disable no-secrets/no-secrets */
+const DEFAULT_PLACEHOLDER =
+  'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjNmNGY2Ii8+PC9zdmc+';
+/* eslint-enable no-secrets/no-secrets */
+
 interface LazyImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   src: string;
   alt: string;
@@ -17,7 +23,7 @@ interface LazyImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 export const LazyImage: React.FC<LazyImageProps> = ({
   src,
   alt,
-  placeholder = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjNmNGY2Ii8+PC9zdmc+',
+  placeholder = DEFAULT_PLACEHOLDER,
   className,
   loadingClassName,
   errorClassName,
