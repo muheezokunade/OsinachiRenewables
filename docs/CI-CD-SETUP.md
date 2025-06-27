@@ -1,10 +1,13 @@
 # CI/CD Pipeline Documentation
 
-This document provides comprehensive information about the CI/CD pipeline setup for the Osinachi Renewables project.
+This document provides comprehensive information about the CI/CD pipeline setup for the Osinachi
+Renewables project.
 
 ## Overview
 
-Our CI/CD pipeline is built with **GitHub Actions** and includes multiple layers of security, quality, and performance checks. The pipeline automatically runs on every push and pull request, ensuring code quality and security before deployment.
+Our CI/CD pipeline is built with **GitHub Actions** and includes multiple layers of security,
+quality, and performance checks. The pipeline automatically runs on every push and pull request,
+ensuring code quality and security before deployment.
 
 ## Pipeline Architecture
 
@@ -17,21 +20,21 @@ graph TD
     E --> F[Deploy to Netlify]
     F --> G[Performance Tests]
     G --> H[Security Monitoring]
-    
+
     B --> B1[Dependency Scan]
     B --> B2[Secret Detection]
     B --> B3[License Check]
-    
+
     C --> C1[ESLint]
     C --> C2[Prettier]
     C --> C3[TypeScript]
-    
+
     D --> D1[Unit Tests]
     D --> D2[Coverage]
-    
+
     E --> E1[Build Verification]
     E --> E2[Security Scan]
-    
+
     G --> G1[Lighthouse]
     G --> G2[Accessibility]
 ```
@@ -41,6 +44,7 @@ graph TD
 ### 1. Main CI/CD Pipeline (`.github/workflows/ci-cd.yml`)
 
 **Triggers:**
+
 - Push to `main` or `develop` branches
 - Pull requests to `main` or `develop`
 - Daily scheduled runs at 2 AM UTC
@@ -48,38 +52,45 @@ graph TD
 **Jobs:**
 
 #### Security Scan
+
 - **NPM Audit**: Scans for known vulnerabilities in dependencies
 - **Snyk Security Scan**: Advanced vulnerability detection
 - **Secret Detection**: Uses TruffleHog to scan for exposed secrets
 - **CodeQL Analysis**: Static code analysis for security issues
 
 #### Code Quality
+
 - **ESLint**: Linting with security rules enabled
 - **Prettier**: Code formatting verification
 - **TypeScript**: Type checking
 - **Commit Message Validation**: Enforces conventional commit format
 
 #### Tests
+
 - **Unit Tests**: Runs on Node.js 18 and 20
 - **Coverage**: Generates and uploads coverage reports to Codecov
 
 #### Build & Deploy
+
 - **Application Build**: Creates production build
 - **Build Security Scan**: Scans build output for sensitive data
 - **Netlify Deployment**: Deploys to production (main branch only)
 - **Post-deployment Verification**: Checks deployment accessibility
 
 #### Performance Testing
+
 - **Lighthouse CI**: Tests performance, accessibility, SEO, and PWA metrics
 - **Multi-page Testing**: Tests key pages of the application
 
 ### 2. Security Scan Workflow (`.github/workflows/security-scan.yml`)
 
 **Triggers:**
+
 - Daily at 3 AM UTC
 - Manual trigger via GitHub UI
 
 **Features:**
+
 - Comprehensive dependency vulnerability scanning
 - Advanced secret detection across git history
 - License compliance checking
@@ -88,9 +99,11 @@ graph TD
 ### 3. Branch Protection (`.github/workflows/branch-protection.yml`)
 
 **Triggers:**
+
 - Pull requests to `main` or `develop`
 
 **Checks:**
+
 - Commit message validation
 - Secret scanning in PR changes
 - Large file detection
@@ -102,18 +115,21 @@ graph TD
 ## Security Features
 
 ### Dependency Management
+
 - **Automated Updates**: Dependabot configured for weekly updates
 - **Security-first**: Prioritizes security patches
 - **Grouped Updates**: Related dependencies updated together
 - **Version Control**: Ignores major version updates for stability
 
 ### Secret Protection
+
 - **Pre-commit Scanning**: Prevents secrets from being committed
 - **Historical Scanning**: Checks entire git history
 - **Pattern Detection**: Multiple secret patterns detected
 - **Build Output Scanning**: Ensures no secrets in production builds
 
 ### Code Security
+
 - **ESLint Security Rules**: Detects common security issues
 - **Object Injection Protection**: Prevents prototype pollution
 - **Regex Safety**: Detects unsafe regular expressions
@@ -147,6 +163,7 @@ npx husky install
 ```
 
 **Pre-commit checks:**
+
 - Code formatting (Prettier)
 - Linting (ESLint)
 - Type checking (TypeScript)
@@ -167,6 +184,7 @@ security(deps): update vulnerable dependencies
 ```
 
 **Types:**
+
 - `feat`: New features
 - `fix`: Bug fixes
 - `docs`: Documentation changes
@@ -223,11 +241,11 @@ Located in `lighthouserc.json`:
     },
     "assert": {
       "assertions": {
-        "categories:performance": ["warn", {"minScore": 0.8}],
-        "categories:accessibility": ["error", {"minScore": 0.9}],
-        "categories:best-practices": ["warn", {"minScore": 0.8}],
-        "categories:seo": ["warn", {"minScore": 0.8}],
-        "categories:pwa": ["warn", {"minScore": 0.7}]
+        "categories:performance": ["warn", { "minScore": 0.8 }],
+        "categories:accessibility": ["error", { "minScore": 0.9 }],
+        "categories:best-practices": ["warn", { "minScore": 0.8 }],
+        "categories:seo": ["warn", { "minScore": 0.8 }],
+        "categories:pwa": ["warn", { "minScore": 0.7 }]
       }
     }
   }
@@ -306,6 +324,7 @@ env:
 ### Development Workflow
 
 1. **Create Feature Branch**
+
    ```bash
    git checkout -b feature/your-feature-name
    ```
@@ -316,6 +335,7 @@ env:
    - Ensure tests pass
 
 3. **Push Changes**
+
    ```bash
    git push origin feature/your-feature-name
    ```
@@ -411,5 +431,4 @@ For issues with the CI/CD pipeline:
 
 ---
 
-**Last Updated**: December 2024
-**Version**: 1.0.0 
+**Last Updated**: December 2024 **Version**: 1.0.0
