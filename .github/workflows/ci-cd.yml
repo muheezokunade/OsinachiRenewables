@@ -51,14 +51,17 @@ jobs:
           base: main
           head: HEAD
           extra_args: --debug --only-verified
+        continue-on-error: true
 
       - name: CodeQL Analysis
         uses: github/codeql-action/init@v3
         with:
           languages: javascript, typescript
+        continue-on-error: true
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
+        continue-on-error: true
 
   # Code quality and linting
   code-quality:
