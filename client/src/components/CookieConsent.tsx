@@ -29,6 +29,7 @@ export default function CookieConsent() {
   const [isVisible, setIsVisible] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
   const [preferences, setPreferences] = useState<CookiePreferences>({
     essential: true, // Always true, cannot be disabled
     analytics: false,
@@ -44,13 +45,19 @@ export default function CookieConsent() {
       // Delay appearance for better UX
       const timer = setTimeout(() => {
         setIsVisible(true);
-        setIsAnimating(true);
+        // Start animation after a brief delay to ensure proper sequence
+        setTimeout(() => {
+          setIsAnimating(true);
+        }, 50);
       }, 1000);
       return () => clearTimeout(timer);
     }
   }, []);
 
   const handleAcceptAll = () => {
+    if (isProcessing) return;
+    setIsProcessing(true);
+
     const allAccepted = {
       essential: true,
       analytics: true,
@@ -64,19 +71,22 @@ export default function CookieConsent() {
     // Start exit animation
     setIsAnimating(false);
 
-    // Hide after animation completes
+    // Hide after animation completes and show toast
     setTimeout(() => {
       setIsVisible(false);
+      setIsProcessing(false);
+      toast({
+        title: 'Preferences saved',
+        description: 'All cookies have been enabled for the best experience.',
+        duration: 3000,
+      });
     }, 300);
-
-    toast({
-      title: 'Preferences saved',
-      description: 'All cookies have been enabled for the best experience.',
-      duration: 3000,
-    });
   };
 
   const handleAcceptSelected = () => {
+    if (isProcessing) return;
+    setIsProcessing(true);
+
     localStorage.setItem('cookie-consent', JSON.stringify(preferences));
     localStorage.setItem('cookie-consent-date', new Date().toISOString());
 
@@ -84,19 +94,22 @@ export default function CookieConsent() {
     setIsAnimating(false);
     setShowSettings(false);
 
-    // Hide after animation completes
+    // Hide after animation completes and show toast
     setTimeout(() => {
       setIsVisible(false);
+      setIsProcessing(false);
+      toast({
+        title: 'Preferences saved',
+        description: 'Your cookie preferences have been updated.',
+        duration: 3000,
+      });
     }, 300);
-
-    toast({
-      title: 'Preferences saved',
-      description: 'Your cookie preferences have been updated.',
-      duration: 3000,
-    });
   };
 
   const handleRejectAll = () => {
+    if (isProcessing) return;
+    setIsProcessing(true);
+
     const minimalConsent = {
       essential: true, // Essential cookies cannot be disabled
       analytics: false,
@@ -110,17 +123,17 @@ export default function CookieConsent() {
     // Start exit animation
     setIsAnimating(false);
 
-    // Hide after animation completes
+    // Hide after animation completes and show toast
     setTimeout(() => {
       setIsVisible(false);
+      setIsProcessing(false);
+      toast({
+        title: 'Preferences saved',
+        description:
+          'Only essential cookies are enabled. Some features may be limited.',
+        duration: 3000,
+      });
     }, 300);
-
-    toast({
-      title: 'Preferences saved',
-      description:
-        'Only essential cookies are enabled. Some features may be limited.',
-      duration: 3000,
-    });
   };
 
   const handlePreferenceChange = (
@@ -132,12 +145,16 @@ export default function CookieConsent() {
   };
 
   const handleClose = () => {
+    if (isProcessing) return;
+    setIsProcessing(true);
+
     // Start exit animation
     setIsAnimating(false);
 
     // Hide after animation completes
     setTimeout(() => {
       setIsVisible(false);
+      setIsProcessing(false);
     }, 300);
   };
 
@@ -191,6 +208,7 @@ export default function CookieConsent() {
                   variant='ghost'
                   size='sm'
                   onClick={handleClose}
+                  disabled={isProcessing}
                   className='text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full p-2'
                 >
                   <X className='h-4 w-4' />
@@ -203,6 +221,7 @@ export default function CookieConsent() {
                 <Button
                   variant='outline'
                   onClick={() => setShowSettings(true)}
+                  disabled={isProcessing}
                   className='flex items-center gap-2 flex-1 sm:flex-none border-gray-300 hover:bg-gray-50'
                 >
                   <Settings className='h-4 w-4' />
@@ -211,6 +230,7 @@ export default function CookieConsent() {
                 <Button
                   variant='outline'
                   onClick={handleRejectAll}
+                  disabled={isProcessing}
                   className='flex items-center gap-2 flex-1 sm:flex-none border-gray-300 hover:bg-gray-50'
                 >
                   <AlertCircle className='h-4 w-4' />
@@ -218,6 +238,7 @@ export default function CookieConsent() {
                 </Button>
                 <Button
                   onClick={handleAcceptAll}
+                  disabled={isProcessing}
                   className='flex items-center gap-2 bg-primary-blue hover:bg-primary-blue/90 text-white flex-1 sm:flex-none shadow-lg hover:shadow-xl transition-all duration-200'
                 >
                   <CheckCircle className='h-4 w-4' />
@@ -246,6 +267,7 @@ export default function CookieConsent() {
                   variant='ghost'
                   size='sm'
                   onClick={() => setShowSettings(false)}
+                  disabled={isProcessing}
                   className='text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full p-2'
                 >
                   <X className='h-4 w-4' />
@@ -367,12 +389,14 @@ export default function CookieConsent() {
                 <Button
                   variant='outline'
                   onClick={() => setShowSettings(false)}
+                  disabled={isProcessing}
                   className='flex-1 border-gray-300 hover:bg-gray-50'
                 >
                   Back
                 </Button>
                 <Button
                   onClick={handleAcceptSelected}
+                  disabled={isProcessing}
                   className='flex-1 bg-primary-blue hover:bg-primary-blue/90 text-white shadow-lg hover:shadow-xl transition-all duration-200'
                 >
                   Save Preferences
