@@ -17,6 +17,7 @@ import {
   Cookie,
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { enableAnalytics } from '@/lib/analytics';
 
 interface CookiePreferences {
   essential: boolean;
@@ -80,6 +81,7 @@ export default function CookieConsent() {
         description: 'All cookies have been enabled for the best experience.',
         duration: 3000,
       });
+      enableAnalytics();
     }, 300);
   };
 
@@ -103,6 +105,10 @@ export default function CookieConsent() {
         description: 'Your cookie preferences have been updated.',
         duration: 3000,
       });
+      // Enable analytics only if analytics cookies are accepted
+      if (preferences.analytics) {
+        enableAnalytics();
+      }
     }, 300);
   };
 
