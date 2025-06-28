@@ -1,44 +1,34 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { cn } from '@/lib/utils';
-
-// Default placeholder image - a simple gray rectangle SVG
-/* eslint-disable no-secrets/no-secrets */
-const DEFAULT_PLACEHOLDER =
-  'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjNmNGY2Ii8+PC9zdmc+';
-/* eslint-enable no-secrets/no-secrets */
+import { useDeviceType } from '@/hooks/use-mobile';
 
 interface LazyImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   src: string;
   alt: string;
   placeholder?: string;
   className?: string;
-  loadingClassName?: string;
-  errorClassName?: string;
-  onLoad?: () => void;
-  onError?: () => void;
-  threshold?: number;
-  rootMargin?: string;
+  containerClassName?: string;
+  priority?: boolean;
 }
 
-export const LazyImage: React.FC<LazyImageProps> = ({
+export function LazyImage({
   src,
   alt,
-  placeholder = DEFAULT_PLACEHOLDER,
+  placeholder,
   className,
-  loadingClassName,
-  errorClassName,
-  onLoad,
-  onError,
-  threshold = 0.1,
-  rootMargin = '50px',
+  containerClassName,
+  priority = false,
   ...props
-}) => {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [isInView, setIsInView] = useState(false);
+}: LazyImageProps) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isInView, setIsInView] = useState(priority);
   const [hasError, setHasError] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
+  const { isMobile } = useDeviceType();
 
   useEffect(() => {
+    if (priority) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -47,8 +37,8 @@ export const LazyImage: React.FC<LazyImageProps> = ({
         }
       },
       {
-        threshold,
-        rootMargin,
+        threshold: 0.1,
+        rootMargin: '50px',
       }
     );
 
@@ -57,77 +47,124 @@ export const LazyImage: React.FC<LazyImageProps> = ({
     }
 
     return () => observer.disconnect();
-  }, [threshold, rootMargin]);
+  }, [priority]);
 
   const handleLoad = () => {
-    setIsLoaded(true);
-    onLoad?.();
+    setIsLoading(false);
   };
 
   const handleError = () => {
+    setIsLoading(false);
     setHasError(true);
-    onError?.();
+  };
+
+  // Generate optimized image URL based on device type
+  const getOptimizedSrc = (originalSrc: string) => {
+    if (
+      originalSrc.includes('pexels.com') ||
+      originalSrc.includes('unsplash.com')
+    ) {
+      const width = isMobile ? 600 : 800;
+      const height = isMobile ? 400 : 600;
+
+      if (originalSrc.includes('pexels.com')) {
+        return `${originalSrc}?auto=compress&w=${width}&h=${height}&fit=crop`;
+      }
+
+      if (originalSrc.includes('unsplash.com')) {
+        return `${originalSrc}&w=${width}&h=${height}&fit=crop&auto=format`;
+      }
+    }
+
+    return originalSrc;
   };
 
   return (
-    <div className={cn('relative overflow-hidden', className)}>
-      {/* Placeholder */}
-      <img
-        ref={imgRef}
-        src={placeholder}
-        alt=''
-        className={cn(
-          'absolute inset-0 w-full h-full object-cover transition-opacity duration-300',
-          isLoaded || hasError ? 'opacity-0' : 'opacity-100',
-          loadingClassName
-        )}
-        aria-hidden='true'
-      />
-
-      {/* Actual image */}
-      {isInView && (
+    <div
+      ref={imgRef}
+      className={cn(
+        'relative overflow-hidden',
+        isLoading && 'animate-pulse bg-gray-200',
+        containerClassName
+      )}
+    >
+      {isInView && !hasError && (
         <img
-          src={src}
+          src={getOptimizedSrc(src)}
           alt={alt}
           className={cn(
-            'w-full h-full object-cover transition-opacity duration-300',
-            isLoaded ? 'opacity-100' : 'opacity-0',
-            hasError && errorClassName
+            'transition-opacity duration-300',
+            isLoading ? 'opacity-0' : 'opacity-100',
+            className
           )}
           onLoad={handleLoad}
           onError={handleError}
+          loading={priority ? 'eager' : 'lazy'}
+          decoding='async'
           {...props}
         />
       )}
 
-      {/* Loading indicator */}
-      {isInView && !isLoaded && !hasError && (
-        <div className='absolute inset-0 flex items-center justify-center bg-gray-100'>
-          <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-primary-blue'></div>
+      {/* Placeholder */}
+      {(isLoading || !isInView) && !hasError && (
+        <div
+          className={cn(
+            'absolute inset-0 flex items-center justify-center bg-gray-100',
+            className
+          )}
+        >
+          {placeholder ? (
+            <img
+              src={placeholder}
+              alt={`${alt} placeholder`}
+              className='w-full h-full object-cover opacity-50'
+            />
+          ) : (
+            <div className='w-12 h-12 bg-gray-300 rounded-lg flex items-center justify-center'>
+              <svg
+                className='w-6 h-6 text-gray-400'
+                fill='none'
+                stroke='currentColor'
+                viewBox='0 0 24 24'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth={2}
+                  d='M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z'
+                />
+              </svg>
+            </div>
+          )}
         </div>
       )}
 
-      {/* Error state */}
+      {/* Error State */}
       {hasError && (
-        <div className='absolute inset-0 flex items-center justify-center bg-gray-100 text-gray-500'>
+        <div
+          className={cn(
+            'absolute inset-0 flex items-center justify-center bg-gray-100',
+            className
+          )}
+        >
           <div className='text-center'>
             <svg
-              className='mx-auto h-12 w-12 text-gray-400'
+              className='w-12 h-12 text-gray-400 mx-auto mb-2'
               fill='none'
-              viewBox='0 0 24 24'
               stroke='currentColor'
+              viewBox='0 0 24 24'
             >
               <path
                 strokeLinecap='round'
                 strokeLinejoin='round'
                 strokeWidth={2}
-                d='M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z'
+                d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 15.5c-.77.833.192 2.5 1.732 2.5z'
               />
             </svg>
-            <p className='mt-2 text-sm'>Failed to load image</p>
+            <p className='text-sm text-gray-500'>Failed to load image</p>
           </div>
         </div>
       )}
     </div>
   );
-};
+}
