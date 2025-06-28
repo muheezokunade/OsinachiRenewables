@@ -24,24 +24,24 @@ export default function Navigation() {
       <img
         src='/logo.png'
         alt='Osinachi Renewable Energy Logo'
-        className={`w-auto ${isSmallMobile ? 'h-12' : 'h-14 sm:h-16'}`}
+        className={`w-auto ${isSmallMobile ? 'h-10' : 'h-12 sm:h-16'}`}
       />
-      <div className='flex items-baseline space-x-1 sm:space-x-2'>
+      <div className='flex flex-col sm:flex-row sm:items-baseline sm:space-x-2'>
         <span
-          className={`font-inter font-bold tracking-normal ${
-            isSmallMobile ? 'text-sm' : 'text-base sm:text-xl'
+          className={`font-inter font-bold tracking-normal leading-tight ${
+            isSmallMobile ? 'text-xs' : 'text-sm sm:text-base lg:text-xl'
           }`}
           style={{ color: '#0166ba' }}
         >
           OSINACHI
         </span>
         <span
-          className={`font-inter font-bold tracking-normal ${
-            isSmallMobile ? 'text-sm' : 'text-base sm:text-xl'
+          className={`font-inter font-bold tracking-normal leading-tight ${
+            isSmallMobile ? 'text-xs' : 'text-sm sm:text-base lg:text-xl'
           }`}
           style={{ color: '#0166ba' }}
         >
-          RENEWABLE ENERGY
+          {isSmallMobile ? 'RENEWABLES' : 'RENEWABLE ENERGY'}
         </span>
       </div>
     </div>
@@ -217,7 +217,7 @@ export default function Navigation() {
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div
           className={`flex justify-between items-center ${
-            isSmallMobile ? 'h-16' : 'h-20'
+            isSmallMobile ? 'h-14' : 'h-16 sm:h-20'
           }`}
         >
           <Link href='/'>
