@@ -12,6 +12,10 @@ export default defineConfig({
         ]
       : []),
   ],
+  // Add compatibility settings for Node.js 20
+  esbuild: {
+    target: 'es2022',
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./client/src', import.meta.url)),
