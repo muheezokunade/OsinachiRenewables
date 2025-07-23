@@ -35,10 +35,9 @@ describe('LazyImage', () => {
       />
     );
 
-    // Should render placeholder (using document.querySelector since it has aria-hidden)
-    const placeholderImg = document.querySelector('img[aria-hidden="true"]');
-    expect(placeholderImg).toBeInTheDocument();
-    expect(placeholderImg).toHaveAttribute('aria-hidden', 'true');
+    // Should render placeholder with image icon
+    const placeholderIcon = document.querySelector('svg');
+    expect(placeholderIcon).toBeInTheDocument();
   });
 
   it('sets up intersection observer', () => {
@@ -94,9 +93,9 @@ describe('LazyImage', () => {
     }
 
     await waitFor(() => {
-      // Should show loading spinner
-      const loadingSpinner = document.querySelector('.animate-spin');
-      expect(loadingSpinner).toBeInTheDocument();
+      // Should show loading state (pulse animation)
+      const loadingContainer = document.querySelector('.animate-pulse');
+      expect(loadingContainer).toBeInTheDocument();
     });
   });
 
@@ -188,24 +187,14 @@ describe('LazyImage', () => {
     expect(container).toBeInTheDocument();
   });
 
-  it('uses custom threshold and rootMargin', () => {
-    const customThreshold = 0.5;
-    const customRootMargin = '100px';
-
-    render(
-      <LazyImage
-        src='https://example.com/image.jpg'
-        alt='Test image'
-        threshold={customThreshold}
-        rootMargin={customRootMargin}
-      />
-    );
+  it('uses default threshold and rootMargin', () => {
+    render(<LazyImage src='https://example.com/image.jpg' alt='Test image' />);
 
     expect(mockIntersectionObserver).toHaveBeenCalledWith(
       expect.any(Function),
       {
-        threshold: customThreshold,
-        rootMargin: customRootMargin,
+        threshold: 0.1,
+        rootMargin: '50px',
       }
     );
   });

@@ -6,3 +6,6 @@ vite.config.ts.*
 *.tar.gz
 .env
 coverage
+
+# Local Netlify folder
+.netlify

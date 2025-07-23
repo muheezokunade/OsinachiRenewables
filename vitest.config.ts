@@ -9,7 +9,14 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['./client/src/test/setup.ts'],
     include: ['**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
-    exclude: ['node_modules', 'dist', '.idea', '.git', '.cache'],
+    exclude: [
+      'node_modules',
+      'dist',
+      '.idea',
+      '.git',
+      '.cache',
+      '.netlify/plugins',
+    ],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
