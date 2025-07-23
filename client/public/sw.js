@@ -45,6 +45,11 @@ self.addEventListener('fetch', event => {
   const { request } = event;
   const url = new URL(request.url);
 
+  // Skip external resources (fonts, analytics, etc.)
+  if (url.origin !== location.origin) {
+    return;
+  }
+
   // Handle API requests
   if (url.pathname.startsWith('/api/')) {
     event.respondWith(handleApiRequest(request));
