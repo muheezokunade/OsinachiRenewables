@@ -198,6 +198,10 @@ export const SEOConfigs = {
         '@type': 'Place',
         address: {
           '@type': 'PostalAddress',
+          streetAddress:
+            'Halo Restaurant by lekki water corporation, Hakeem Dickson Street, lekki phase 1',
+          addressLocality: 'Lekki',
+          addressRegion: 'Lagos',
           addressCountry: 'Nigeria',
         },
       },

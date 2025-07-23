@@ -13,7 +13,7 @@ import {
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
-import { Phone, Mail, Clock, MessageCircle } from 'lucide-react';
+import { Phone, Mail, Clock, MessageCircle, MapPin } from 'lucide-react';
 import {
   insertContactSubmissionSchema,
   type InsertContactSubmission,
@@ -95,6 +95,12 @@ export default function Contact() {
       icon: MessageCircle,
       title: 'WhatsApp',
       value: 'wa.me/2349060033963',
+    },
+    {
+      icon: MapPin,
+      title: 'Visit Us',
+      value:
+        'Halo Restaurant by lekki water corporation, Hakeem Dickson Street, lekki phase 1, lekki Lagos',
     },
   ];
 

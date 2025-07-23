@@ -295,7 +295,10 @@ export default function PrivacyPolicy() {
                       <MapPin className='w-5 h-5 text-green-600 mt-0.5 flex-shrink-0' />
                       <div>
                         <p className='font-medium'>Address:</p>
-                        <p>No. 2 Oladele Street, Ilasamaja Lagos State</p>
+                        <p>
+                          Halo Restaurant by lekki water corporation, Hakeem
+                          Dickson Street, lekki phase 1, lekki Lagos
+                        </p>
                       </div>
                     </div>
 

@@ -6,6 +6,7 @@ import {
   Phone,
   Mail,
   MessageCircle,
+  MapPin,
 } from 'lucide-react';
 
 export default function Footer() {
@@ -155,6 +156,13 @@ export default function Footer() {
                 >
                   WhatsApp Chat
                 </a>
+              </div>
+              <div className='flex items-start space-x-3'>
+                <MapPin className='h-4 w-4 text-accent-yellow flex-shrink-0 mt-1' />
+                <div className='text-gray-300 text-sm'>
+                  Halo Restaurant by lekki water corporation, Hakeem Dickson
+                  Street, lekki phase 1, lekki Lagos
+                </div>
               </div>
             </div>
           </div>

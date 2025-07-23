@@ -44,7 +44,7 @@ export default function ContactPage() {
               {
                 question: 'What areas do you serve in Nigeria?',
                 answer:
-                  'We provide services across Nigeria, with primary operations in Lagos, Abuja, Port Harcourt, and surrounding areas. We can accommodate projects nationwide.',
+                  'We provide services across Nigeria, with our main office located at Halo Restaurant by lekki water corporation, Hakeem Dickson Street, lekki phase 1, lekki Lagos. We serve Lagos, Abuja, Port Harcourt, and surrounding areas nationwide.',
               },
               {
                 question: 'How long does a typical installation take?',
