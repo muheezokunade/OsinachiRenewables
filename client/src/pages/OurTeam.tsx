@@ -15,6 +15,7 @@ import SEO, { SEOConfigs } from '@/components/SEO';
 import { LazyImage } from '@/components/ui/lazy-image';
 
 const OurTeam: React.FC = () => {
+  // Team members with updated titles
   const team = [
     {
       name: 'Osinachi Alex',
