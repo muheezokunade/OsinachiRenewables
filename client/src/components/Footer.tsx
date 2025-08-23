@@ -140,10 +140,10 @@ export default function Footer() {
               <div className='flex items-center space-x-3'>
                 <Mail className='h-4 w-4 text-accent-yellow flex-shrink-0' />
                 <a
-                  href='mailto:info@osinachirenewables.com'
+                  href='mailto:info@osinachienergy.com'
                   className='text-gray-300 hover:text-accent-yellow transition duration-300'
                 >
-                  info@osinachirenewables.com
+                  info@osinachienergy.com
                 </a>
               </div>
               <div className='flex items-center space-x-3'>

@@ -17,12 +17,12 @@ export default function SEO({
   description = "Nigeria's leading integrated power solutions provider. Expert generator maintenance for Perkins, Caterpillar, Cummins & Lister. Custom solar & inverter systems for homes, businesses & industries. 100+ successful deployments, 99.9% uptime guarantee.",
   keywords = 'solar power Nigeria, generator maintenance Lagos, inverter systems Abuja, renewable energy Nigeria, Perkins generator parts, Caterpillar generator service, Cummins generator maintenance, solar installation Nigeria, hybrid power systems, energy audit Nigeria, IoT monitoring, sustainable energy solutions',
   canonical,
-  ogImage = 'https://osinachirenewables.com/og-image.jpg',
+  ogImage = 'https://osinachienergy.com/og-image.jpg',
   ogType = 'website',
   structuredData,
   noIndex = false,
 }: SEOProps) {
-  const baseUrl = 'https://osinachirenewables.com';
+  const baseUrl = 'https://osinachienergy.com';
   const fullCanonical = canonical ? `${baseUrl}${canonical}` : baseUrl;
 
   useEffect(() => {
@@ -84,10 +84,10 @@ export const SEOConfigs = {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
       name: 'Osinachi Renewable Energy',
-      url: 'https://osinachirenewables.com',
+      url: 'https://osinachienergy.com',
       potentialAction: {
         '@type': 'SearchAction',
-        target: 'https://osinachirenewables.com/search?q={search_term_string}',
+        target: 'https://osinachienergy.com/search?q={search_term_string}',
         'query-input': 'required name=search_term_string',
       },
     },
@@ -151,7 +151,7 @@ export const SEOConfigs = {
     title:
       'Contact Osinachi Renewable Energy - Get Free Consultation | Lagos, Nigeria',
     description:
-      'Contact Osinachi Renewable Energy for expert power solutions. Free consultation, energy audit & quote. Call +234-906-003-3963 or email info@osinachirenewables.com. Serving Lagos, Abuja, Port Harcourt & nationwide.',
+      'Contact Osinachi Renewable Energy for expert power solutions. Free consultation, energy audit & quote. Call +234-906-003-3963 or email info@osinachienergy.com. Serving Lagos, Abuja, Port Harcourt & nationwide.',
     keywords:
       'contact Osinachi Renewable Energy, power solutions consultation, energy audit request, generator maintenance quote, solar installation quote, Nigeria power solutions contact',
     canonical: '/contact',

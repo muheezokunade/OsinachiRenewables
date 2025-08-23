@@ -1,6 +1,6 @@
 // Sitemap configuration for Osinachi Renewable Energy
 export const sitemapConfig = {
-  baseUrl: 'https://osinachirenewables.com',
+  baseUrl: 'https://osinachienergy.com',
   pages: [
     {
       path: '/',
@@ -102,7 +102,7 @@ export const robotsTxt = `User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://osinachirenewables.com/sitemap.xml
+Sitemap: https://osinachienergy.com/sitemap.xml
 
 # Disallow admin areas (if any)
 Disallow: /admin/

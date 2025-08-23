@@ -40,10 +40,7 @@ export const securityConfig = {
   cors: {
     origin:
       env.NODE_ENV === 'production'
-        ? [
-            'https://osinachirenewables.com',
-            'https://www.osinachirenewables.com',
-          ]
+        ? ['https://osinachienergy.com', 'https://www.osinachienergy.com']
         : ['http://localhost:3000', 'http://127.0.0.1:3000'],
     credentials: true,
   },

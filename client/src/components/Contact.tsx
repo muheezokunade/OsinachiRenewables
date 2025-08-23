@@ -84,7 +84,7 @@ export default function Contact() {
     {
       icon: Mail,
       title: 'Email Us',
-      value: 'info@osinachirenewables.com',
+      value: 'info@osinachienergy.com',
     },
     {
       icon: Clock,
@@ -191,7 +191,7 @@ export default function Contact() {
                         </a>
                       ) : isEmail ? (
                         <a
-                          href='mailto:info@osinachirenewables.com'
+                          href='mailto:info@osinachienergy.com'
                           className={`text-primary-blue hover:text-primary-blue/80 underline break-all ${
                             isSmallMobile ? 'text-sm' : 'text-base'
                           }`}
