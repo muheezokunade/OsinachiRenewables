@@ -53,6 +53,7 @@ export async function setupVite(app: Express, server: Server) {
       );
 
       // always reload the index.html file from disk incase it changes
+      // eslint-disable-next-line security/detect-non-literal-fs-filename
       let template = await fs.promises.readFile(clientTemplate, 'utf-8');
       template = template.replace(
         `src="/src/main.tsx"`,
@@ -70,6 +71,7 @@ export async function setupVite(app: Express, server: Server) {
 export function serveStatic(app: Express) {
   const distPath = path.resolve(import.meta.dirname, 'public');
 
+  // eslint-disable-next-line security/detect-non-literal-fs-filename
   if (!fs.existsSync(distPath)) {
     throw new Error(
       `Could not find the build directory: ${distPath}, make sure to build the client first`

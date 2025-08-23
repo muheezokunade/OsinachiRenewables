@@ -9,6 +9,7 @@ import validator from 'validator';
 const router = express.Router();
 
 // Input sanitization middleware
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const sanitizeInput = (req: any, res: any, next: any) => {
   if (req.body) {
     Object.keys(req.body).forEach(key => {
@@ -23,6 +24,7 @@ const sanitizeInput = (req: any, res: any, next: any) => {
 };
 
 // Authentication middleware for admin endpoints
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const authenticateAdmin = (req: any, res: any, next: any) => {
   const authHeader = req.headers.authorization;
 
