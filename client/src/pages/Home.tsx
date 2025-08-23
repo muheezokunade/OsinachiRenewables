@@ -9,7 +9,6 @@ import Portfolio from '@/components/Portfolio';
 import Testimonials from '@/components/Testimonials';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
-import CookieConsent from '@/components/CookieConsent';
 import SEO, { SEOConfigs } from '@/components/SEO';
 
 export default function Home() {
@@ -27,7 +26,6 @@ export default function Home() {
       <Testimonials />
       <Contact />
       <Footer />
-      <CookieConsent />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import CookieConsent from '@/components/CookieConsent';
+
 import Contact from '@/components/Contact';
 import SEO, { SEOConfigs } from '@/components/SEO';
 
@@ -74,7 +74,6 @@ export default function ContactPage() {
       </section>
 
       <Footer />
-      <CookieConsent />
     </div>
   );
 }

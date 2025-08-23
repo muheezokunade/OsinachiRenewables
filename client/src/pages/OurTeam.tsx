@@ -10,7 +10,7 @@ import { Button } from '../components/ui/button';
 import { Link } from 'wouter';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import CookieConsent from '@/components/CookieConsent';
+
 import SEO, { SEOConfigs } from '@/components/SEO';
 import { LazyImage } from '@/components/ui/lazy-image';
 
@@ -31,7 +31,7 @@ const OurTeam: React.FC = () => {
     },
     {
       name: 'Yetunde Alakija',
-      role: 'Chief Technology Officer',
+      role: 'Managing Director',
       image:
         'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=compress&w=400&h=400&fit=crop',
       bio: 'Technology visionary with deep expertise in renewable energy systems and digital innovation. Drives our technological advancement and product development.',
@@ -53,7 +53,7 @@ const OurTeam: React.FC = () => {
     },
     {
       name: 'Muheez Okunade',
-      role: 'Tech Lead',
+      role: 'Lead Business Analyst',
       image: '/team/muheez-okunade.jpg',
       bio: 'Experienced technology leader specializing in full-stack development and system architecture. Leads our technical team in building innovative energy solutions.',
       expertise: [
@@ -239,7 +239,6 @@ const OurTeam: React.FC = () => {
       </section>
 
       <Footer />
-      <CookieConsent />
     </div>
   );
 };

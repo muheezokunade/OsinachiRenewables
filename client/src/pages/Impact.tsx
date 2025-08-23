@@ -11,7 +11,7 @@ import { Progress } from '../components/ui/progress';
 import { Link } from 'wouter';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import CookieConsent from '@/components/CookieConsent';
+
 import SEO, { SEOConfigs } from '@/components/SEO';
 
 const Impact: React.FC = () => {
@@ -703,7 +703,6 @@ const Impact: React.FC = () => {
       </section>
 
       <Footer />
-      <CookieConsent />
     </div>
   );
 };

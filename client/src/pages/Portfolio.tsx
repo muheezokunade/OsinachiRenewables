@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import CookieConsent from '@/components/CookieConsent';
+
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Link } from 'wouter';
@@ -196,7 +196,6 @@ export default function Portfolio() {
       </section>
 
       <Footer />
-      <CookieConsent />
     </div>
   );
 }

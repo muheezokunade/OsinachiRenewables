@@ -6,7 +6,7 @@ import { Input } from '../components/ui/input';
 import { Link } from 'wouter';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import CookieConsent from '@/components/CookieConsent';
+
 import SEO, { SEOConfigs } from '@/components/SEO';
 
 const NewsBlog: React.FC = () => {
@@ -431,7 +431,6 @@ const NewsBlog: React.FC = () => {
       </section>
 
       <Footer />
-      <CookieConsent />
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import { useRoute } from 'wouter';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import CookieConsent from '@/components/CookieConsent';
+
 import SEO from '@/components/SEO';
 import { projects } from '../utils/portfolioData';
 import { Badge } from '@/components/ui/badge';
@@ -27,7 +27,6 @@ export default function PortfolioProject() {
           </Link>
         </div>
         <Footer />
-        <CookieConsent />
       </div>
     );
   }
@@ -116,7 +115,6 @@ export default function PortfolioProject() {
         </div>
       </section>
       <Footer />
-      <CookieConsent />
     </div>
   );
 }

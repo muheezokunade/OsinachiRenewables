@@ -19,7 +19,6 @@ import {
 import { Link } from 'wouter';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import CookieConsent from '@/components/CookieConsent';
 
 const Careers: React.FC = () => {
   const [selectedJob, setSelectedJob] = useState<string | null>(null);
@@ -545,7 +544,6 @@ const Careers: React.FC = () => {
       </section>
 
       <Footer />
-      <CookieConsent />
     </div>
   );
 };

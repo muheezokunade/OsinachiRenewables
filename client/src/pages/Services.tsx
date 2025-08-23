@@ -1,6 +1,6 @@
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import CookieConsent from '@/components/CookieConsent';
+
 import SEO, { SEOConfigs } from '@/components/SEO';
 import { Button } from '@/components/ui/button';
 import { Link } from 'wouter';
@@ -224,7 +224,6 @@ export default function Services() {
       </section>
 
       <Footer />
-      <CookieConsent />
     </div>
   );
 }
