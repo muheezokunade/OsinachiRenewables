@@ -46,8 +46,7 @@ const OurTeam: React.FC = () => {
     {
       name: 'Onuchukwu Chioma Christabel',
       role: 'Chief Operations Officer',
-      image:
-        'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=compress&w=400&h=400&fit=crop',
+      image: '/team/chioma.jpg',
       bio: 'Operations expert with 12+ years managing large-scale energy projects across West Africa.',
       expertise: ['Project Management', 'Operations', 'Quality Control'],
       linkedin: '#',
