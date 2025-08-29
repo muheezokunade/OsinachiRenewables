@@ -39,11 +39,7 @@ self.addEventListener('fetch', event => {
 
   // Network-first for navigation (HTML) to avoid stale index.html
   if (request.mode === 'navigate') {
-    event.respondWith(
-      fetch(request, { cache: 'no-store' }).catch(
-        () => new Response('Offline', { status: 503 })
-      )
-    );
+    event.respondWith(networkFirstNavigation(request));
     return;
   }
 
@@ -59,9 +55,35 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Default: try network, then cache
-  event.respondWith(fetch(request).catch(() => caches.match(request)));
+  // Default: try network, then cache, then graceful fallback
+  event.respondWith(handleDefault(request));
 });
+
+async function networkFirstNavigation(request) {
+  try {
+    return await fetch(request, { cache: 'no-store' });
+  } catch (err) {
+    void err;
+    const cachedRoot = await caches.match('/');
+    if (cachedRoot) return cachedRoot;
+    return new Response('Service Unavailable', { status: 503 });
+  }
+}
+
+async function handleDefault(request) {
+  try {
+    return await fetch(request);
+  } catch (err) {
+    void err;
+    const cached = await caches.match(request);
+    if (cached) return cached;
+    // Avoid errors for icons/images when offline
+    if (request.destination === 'image' || /favicon\.ico$/.test(request.url)) {
+      return new Response('', { status: 204 });
+    }
+    return new Response('Service Unavailable', { status: 503 });
+  }
+}
 
 async function cacheFirst(cacheName, request) {
   const cache = await caches.open(cacheName);
