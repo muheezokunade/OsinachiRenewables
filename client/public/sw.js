@@ -1,134 +1,88 @@
-const CACHE_NAME = 'osinachi-renewables-v1';
-const STATIC_ASSETS = [
-  '/',
-  '/manifest.json',
-  '/logo.png',
-  '/assets/index.css',
-  '/assets/index.js',
-];
+const CACHE_VERSION = 'v3';
+const STATIC_CACHE = `osinachi-static-${CACHE_VERSION}`;
+const ASSET_CACHE = `osinachi-assets-${CACHE_VERSION}`;
+const API_CACHE_NAME = `osinachi-api-${CACHE_VERSION}`;
 
-const API_CACHE_NAME = 'osinachi-api-v1';
+// Only stable, non-hashed assets. Do NOT include HTML or hashed /assets/* files.
+const STATIC_ASSETS = ['/manifest.json', '/logo.png'];
 
-// Install event - cache static assets
 self.addEventListener('install', event => {
-  console.log('Service Worker: Installing...');
   event.waitUntil(
-    caches
-      .open(CACHE_NAME)
-      .then(cache => {
-        console.log('Service Worker: Caching static assets');
-        return cache.addAll(STATIC_ASSETS);
-      })
-      .catch(err => console.log('Service Worker: Cache failed', err))
+    caches.open(STATIC_CACHE).then(cache => cache.addAll(STATIC_ASSETS))
   );
+  // Activate the new SW immediately
+  self.skipWaiting();
 });
 
-// Activate event - clean up old caches
 self.addEventListener('activate', event => {
-  console.log('Service Worker: Activating...');
   event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cache => {
-          if (cache !== CACHE_NAME && cache !== API_CACHE_NAME) {
-            console.log('Service Worker: Clearing old cache', cache);
-            return caches.delete(cache);
+    caches.keys().then(keys =>
+      Promise.all(
+        keys.map(key => {
+          if (![STATIC_CACHE, ASSET_CACHE, API_CACHE_NAME].includes(key)) {
+            return caches.delete(key);
           }
         })
-      );
-    })
+      )
+    )
   );
+  // Take control of uncontrolled clients ASAP
+  self.clients.claim();
 });
 
-// Fetch event - serve from cache, fallback to network
 self.addEventListener('fetch', event => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // Skip external resources (fonts, analytics, etc.)
-  if (url.origin !== location.origin) {
+  // Only handle same-origin
+  if (url.origin !== location.origin) return;
+
+  // Network-first for navigation (HTML) to avoid stale index.html
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request, { cache: 'no-store' }).catch(
+        () => new Response('Offline', { status: 503 })
+      )
+    );
     return;
   }
 
-  // Handle API requests
+  // Runtime cache for versioned build assets
+  if (url.pathname.startsWith('/assets/')) {
+    event.respondWith(cacheFirst(ASSET_CACHE, request));
+    return;
+  }
+
+  // API requests: network-first with fallback to cache
   if (url.pathname.startsWith('/api/')) {
-    event.respondWith(handleApiRequest(request));
+    event.respondWith(networkFirst(API_CACHE_NAME, request));
     return;
   }
 
-  // Handle static assets
-  if (request.method === 'GET') {
-    event.respondWith(handleStaticRequest(request));
-  }
+  // Default: try network, then cache
+  event.respondWith(fetch(request).catch(() => caches.match(request)));
 });
 
-// Handle API requests with network-first strategy
-async function handleApiRequest(request) {
-  const cache = await caches.open(API_CACHE_NAME);
-
-  try {
-    // Try network first
-    const networkResponse = await fetch(request);
-
-    // Cache successful responses (except for sensitive endpoints)
-    if (networkResponse.ok && !request.url.includes('contact-submissions')) {
-      cache.put(request, networkResponse.clone());
-    }
-
-    return networkResponse;
-  } catch (error) {
-    console.log('Service Worker: Network failed, trying cache', error);
-
-    // Fallback to cache
-    const cachedResponse = await cache.match(request);
-    if (cachedResponse) {
-      return cachedResponse;
-    }
-
-    // Return offline response
-    return new Response(
-      JSON.stringify({
-        success: false,
-        message: 'Network unavailable. Please try again when online.',
-      }),
-      {
-        status: 503,
-        statusText: 'Service Unavailable',
-        headers: { 'Content-Type': 'application/json' },
-      }
-    );
-  }
+async function cacheFirst(cacheName, request) {
+  const cache = await caches.open(cacheName);
+  const cached = await cache.match(request);
+  if (cached) return cached;
+  const resp = await fetch(request);
+  if (resp && resp.ok) cache.put(request, resp.clone());
+  return resp;
 }
 
-// Handle static requests with cache-first strategy
-async function handleStaticRequest(request) {
-  const cache = await caches.open(CACHE_NAME);
-
-  // Try cache first
-  const cachedResponse = await cache.match(request);
-  if (cachedResponse) {
-    return cachedResponse;
-  }
-
+async function networkFirst(cacheName, request) {
+  const cache = await caches.open(cacheName);
   try {
-    // Fallback to network
-    const networkResponse = await fetch(request);
-
-    // Cache the response for future use
-    if (networkResponse.ok) {
-      cache.put(request, networkResponse.clone());
-    }
-
-    return networkResponse;
-  } catch (error) {
-    console.log('Service Worker: Both cache and network failed', error);
-
-    // Return offline page for navigation requests
-    if (request.mode === 'navigate') {
-      return caches.match('/') || new Response('Offline', { status: 503 });
-    }
-
-    throw error;
+    const resp = await fetch(request, { cache: 'no-store' });
+    if (resp && resp.ok) cache.put(request, resp.clone());
+    return resp;
+  } catch (err) {
+    void err;
+    const cached = await cache.match(request);
+    if (cached) return cached;
+    return new Response('Offline', { status: 503 });
   }
 }
 
