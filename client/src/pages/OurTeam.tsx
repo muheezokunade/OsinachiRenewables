@@ -67,8 +67,7 @@ const OurTeam: React.FC = () => {
     {
       name: 'Deborah Igwe',
       role: 'Business Analyst',
-      image:
-        'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=compress&w=400&h=400&fit=crop',
+      image: '/team/deborah.jpg',
       bio: 'Analyzes business processes and market trends to drive strategic decision-making and operational efficiency.',
       expertise: [
         'Business Analysis',
