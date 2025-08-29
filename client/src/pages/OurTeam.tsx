@@ -46,6 +46,8 @@ const OurTeam: React.FC = () => {
       name: 'Onuchukwu Chioma Christabel',
       role: 'Chief Operations Officer',
       image: '/team/chioma.jpg',
+      // Nudge framing upward to prevent face cropping in circle
+      imageClass: 'object-top',
       bio: 'Operations expert with 12+ years managing large-scale energy projects across West Africa.',
       expertise: ['Project Management', 'Operations', 'Quality Control'],
       linkedin: '#',
@@ -157,7 +159,7 @@ const OurTeam: React.FC = () => {
                       <LazyImage
                         src={member.image}
                         alt={`${member.name} - ${member.role}`}
-                        className='w-full h-full object-cover'
+                        className={`w-full h-full object-cover ${member.imageClass ?? ''}`}
                       />
                     </div>
 
@@ -208,32 +210,36 @@ const OurTeam: React.FC = () => {
 
       {/* Join Our Team */}
       <section className='py-20 bg-primary-blue text-white'>
-        <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center'>
-          <h2 className='font-poppins font-bold text-4xl mb-6'>
-            Join Our Mission
-          </h2>
-          <p className='text-xl text-gray-200 mb-8'>
-            We're always looking for passionate individuals who share our vision
-            for a sustainable energy future.
-          </p>
-          <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-            <Link href='/careers'>
-              <Button
-                size='lg'
-                className='bg-accent-yellow text-primary-blue hover:bg-accent-yellow/90 font-semibold'
-              >
-                View Open Positions
-              </Button>
-            </Link>
-            <Link href='/contact'>
-              <Button
-                size='lg'
-                variant='outline'
-                className='border-primary-blue text-primary-blue hover:bg-primary-blue hover:text-white'
-              >
-                Contact Us
-              </Button>
-            </Link>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+          <div className='grid md:grid-cols-2 gap-12 items-center'>
+            <div>
+              <h3 className='font-poppins font-bold text-3xl mb-4'>
+                Join Our Team
+              </h3>
+              <p className='text-lg text-blue-100 mb-6'>
+                We're always looking for passionate individuals to join our
+                mission of transforming Nigeria's energy landscape.
+              </p>
+              <Link href='/careers'>
+                <Button
+                  size='lg'
+                  className='bg-white text-primary-blue hover:bg-blue-50'
+                >
+                  View Open Roles
+                </Button>
+              </Link>
+            </div>
+            <div className='relative'>
+              <div className='absolute -inset-1 bg-gradient-to-r from-green-500 to-blue-500 rounded-2xl blur opacity-30'></div>
+              <div className='relative bg-white p-6 rounded-2xl shadow-lg'>
+                <ul className='space-y-3 text-gray-700'>
+                  <li>• Competitive compensation and benefits</li>
+                  <li>• Collaborative, mission-driven culture</li>
+                  <li>• Continuous learning and development</li>
+                  <li>• Real impact on Nigeria's energy future</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </section>
