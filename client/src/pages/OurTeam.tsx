@@ -5,7 +5,6 @@ import {
   CardHeader,
   CardTitle,
 } from '../components/ui/card';
-import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { Link } from 'wouter';
 import Navigation from '@/components/Navigation';
@@ -199,22 +198,7 @@ const OurTeam: React.FC = () => {
                       {member.role}
                     </p>
                   </CardHeader>
-                  <CardContent>
-                    <p className='text-gray-600 mb-4 text-center leading-relaxed'>
-                      {member.bio}
-                    </p>
-                    <div className='flex flex-wrap gap-2 justify-center'>
-                      {member.expertise.map((skill, skillIndex) => (
-                        <Badge
-                          key={skillIndex}
-                          variant='outline'
-                          className='text-xs bg-gray-50 border-gray-200 text-gray-700'
-                        >
-                          {skill}
-                        </Badge>
-                      ))}
-                    </div>
-                  </CardContent>
+                  <CardContent />
                 </div>
               </Card>
             ))}
