@@ -59,8 +59,8 @@ export default defineConfig({
     sourcemap: process.env.NODE_ENV === 'development',
     // Performance: Set chunk size warning limit
     chunkSizeWarningLimit: 500,
-    // Enable modern builds
-    target: 'esnext',
+    // Enable modern builds with better compatibility
+    target: 'es2020',
     minify: 'esbuild',
   },
   server: {
