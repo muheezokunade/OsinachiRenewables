@@ -150,57 +150,73 @@ const OurTeam: React.FC = () => {
             {team.map((member, index) => (
               <Card
                 key={index}
-                className='overflow-hidden hover:shadow-lg transition-shadow'
+                className='overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-105 border border-gray-100'
               >
-                <div className='relative'>
-                  <LazyImage
-                    src={member.image}
-                    alt={`${member.name} - ${member.role}`}
-                    className='w-full h-64 object-cover'
-                  />
-                  <div className='absolute top-4 right-4'>
-                    <Button
-                      size='sm'
-                      variant='secondary'
-                      className='bg-white text-primary-blue hover:bg-gray-100'
-                      asChild
-                    >
-                      <a
-                        href={member.linkedin}
-                        target='_blank'
-                        rel='noopener noreferrer'
+                <div className='relative p-6'>
+                  {/* Perfect Circle Image Container */}
+                  <div className='relative mx-auto mb-6'>
+                    <div className='w-48 h-48 rounded-full overflow-hidden shadow-2xl border-4 border-white mx-auto circle-glow'>
+                      <LazyImage
+                        src={member.image}
+                        alt={`${member.name} - ${member.role}`}
+                        className='w-full h-full object-cover'
+                      />
+                    </div>
+
+                    {/* Decorative Elements */}
+                    <div className='absolute -top-2 -right-2 w-8 h-8 bg-accent-yellow rounded-full opacity-60'></div>
+                    <div className='absolute -bottom-2 -left-2 w-6 h-6 bg-primary-blue rounded-full opacity-40'></div>
+
+                    {/* LinkedIn Button */}
+                    <div className='absolute top-4 right-4'>
+                      <Button
+                        size='sm'
+                        variant='secondary'
+                        className='bg-white text-primary-blue hover:bg-gray-100 rounded-full shadow-lg border border-gray-200'
+                        asChild
                       >
-                        <svg
-                          className='w-4 h-4'
-                          fill='currentColor'
-                          viewBox='0 0 24 24'
+                        <a
+                          href={member.linkedin}
+                          target='_blank'
+                          rel='noopener noreferrer'
                         >
-                          <path d='M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z' />
-                        </svg>
-                      </a>
-                    </Button>
+                          <svg
+                            className='w-4 h-4'
+                            fill='currentColor'
+                            viewBox='0 0 24 24'
+                          >
+                            <path d='M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z' />
+                          </svg>
+                        </a>
+                      </Button>
+                    </div>
                   </div>
+
+                  <CardHeader className='text-center pb-4'>
+                    <CardTitle className='text-xl text-primary-blue'>
+                      {member.name}
+                    </CardTitle>
+                    <p className='text-green-600 font-semibold'>
+                      {member.role}
+                    </p>
+                  </CardHeader>
+                  <CardContent>
+                    <p className='text-gray-600 mb-4 text-center leading-relaxed'>
+                      {member.bio}
+                    </p>
+                    <div className='flex flex-wrap gap-2 justify-center'>
+                      {member.expertise.map((skill, skillIndex) => (
+                        <Badge
+                          key={skillIndex}
+                          variant='outline'
+                          className='text-xs bg-gray-50 border-gray-200 text-gray-700'
+                        >
+                          {skill}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
                 </div>
-                <CardHeader>
-                  <CardTitle className='text-xl text-primary-blue'>
-                    {member.name}
-                  </CardTitle>
-                  <p className='text-green-600 font-semibold'>{member.role}</p>
-                </CardHeader>
-                <CardContent>
-                  <p className='text-gray-600 mb-4'>{member.bio}</p>
-                  <div className='flex flex-wrap gap-2'>
-                    {member.expertise.map((skill, skillIndex) => (
-                      <Badge
-                        key={skillIndex}
-                        variant='outline'
-                        className='text-xs'
-                      >
-                        {skill}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
               </Card>
             ))}
           </div>

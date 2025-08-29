@@ -220,6 +220,23 @@
     -webkit-overflow-scrolling: touch;
   }
 
+  /* Circular design enhancements */
+  .circle-glow {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  }
+
+  .circle-glow:hover {
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+  }
+
+  .floating-animation {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite alternate;
+  }
+
   /* Performance optimizations for mobile */
   .will-change-transform {
     will-change: transform;
@@ -265,6 +282,25 @@
 }
 
 /* Animation keyframes */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulseGlow {
+  from {
+    box-shadow: 0 0 5px rgba(255, 193, 7, 0.3);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(255, 193, 7, 0.6);
+  }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

@@ -66,7 +66,7 @@ export default defineConfig({
   server: {
     // Security: Bind to localhost in development, allow network in production
     host: process.env.NODE_ENV === 'development' ? '127.0.0.1' : '0.0.0.0',
-    port: 3000,
+    port: 3001,
     strictPort: true,
   },
   // Security: Configure environment variables
