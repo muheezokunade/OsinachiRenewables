@@ -29,19 +29,7 @@ const OurTeam: React.FC = () => {
       ],
       linkedin: '#',
     },
-    {
-      name: 'Yetunde Alakija',
-      role: 'Managing Director',
-      image:
-        'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=compress&w=400&h=400&fit=crop',
-      bio: 'Technology visionary with deep expertise in renewable energy systems and digital innovation. Drives our technological advancement and product development.',
-      expertise: [
-        'Technology Strategy',
-        'Product Development',
-        'Digital Innovation',
-      ],
-      linkedin: '#',
-    },
+
     {
       name: 'Onuchukwu Chioma Christabel',
       role: 'Chief Operations Officer',
@@ -114,7 +102,7 @@ const OurTeam: React.FC = () => {
 
           <div className='grid md:grid-cols-4 gap-8 mb-16'>
             <div className='text-center'>
-              <div className='text-4xl font-bold text-green-600 mb-2'>5</div>
+              <div className='text-4xl font-bold text-green-600 mb-2'>4</div>
               <div className='text-gray-600'>Team Members</div>
             </div>
             <div className='text-center'>
