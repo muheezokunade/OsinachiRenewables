@@ -19,8 +19,7 @@ const OurTeam: React.FC = () => {
     {
       name: 'Osinachi Alex',
       role: 'Chief Executive Officer',
-      image:
-        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=compress&w=400&h=400&fit=crop',
+      image: 'https://i.postimg.cc/Wz47Cnf7/PHOTO-2025-09-05-16-49-36.jpg',
       bio: "Visionary leader with 15+ years in renewable energy. Founded Osinachi Renewables to transform Nigeria's energy landscape.",
       expertise: [
         'Strategic Planning',
