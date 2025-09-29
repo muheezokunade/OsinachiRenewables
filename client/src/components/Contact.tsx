@@ -79,7 +79,7 @@ export default function Contact() {
     {
       icon: Phone,
       title: 'Call Us',
-      value: '+234 906 003 3963',
+      value: '+234 916 594 7467',
     },
     {
       icon: Mail,
@@ -94,7 +94,7 @@ export default function Contact() {
     {
       icon: MessageCircle,
       title: 'WhatsApp',
-      value: 'wa.me/2349060033963',
+      value: 'wa.me/2349165947467',
     },
     {
       icon: MapPin,
@@ -171,7 +171,7 @@ export default function Contact() {
                       </div>
                       {isPhone ? (
                         <a
-                          href='tel:+2349060033963'
+                          href='tel:+2349165947467'
                           className={`text-primary-blue hover:text-primary-blue/80 underline break-all ${
                             isSmallMobile ? 'text-sm' : 'text-base'
                           }`}
@@ -180,7 +180,7 @@ export default function Contact() {
                         </a>
                       ) : isWhatsApp ? (
                         <a
-                          href='https://wa.me/2349060033963'
+                          href='https://wa.me/2349165947467'
                           target='_blank'
                           rel='noopener noreferrer'
                           className={`text-green-600 hover:text-green-700 underline ${

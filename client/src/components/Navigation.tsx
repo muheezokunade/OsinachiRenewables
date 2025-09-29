@@ -99,11 +99,6 @@ export default function Navigation() {
                       About Us
                     </div>
                   </Link>
-                  <Link href='/ourteam' onClick={onItemClick}>
-                    <div className='block px-4 py-3 text-sm text-gray-700 hover:bg-light-gray rounded-lg transition-colors'>
-                      Our Team
-                    </div>
-                  </Link>
                   <Link href='/careers' onClick={onItemClick}>
                     <div className='block px-4 py-3 text-sm text-gray-700 hover:bg-light-gray rounded-lg transition-colors'>
                       Careers
@@ -159,11 +154,6 @@ export default function Navigation() {
               <Link href='/about' onClick={onItemClick}>
                 <span className='block py-2 px-2 text-base text-gray-600 hover:text-primary-blue hover:bg-gray-50 rounded-lg transition-colors'>
                   About Us
-                </span>
-              </Link>
-              <Link href='/ourteam' onClick={onItemClick}>
-                <span className='block py-2 px-2 text-base text-gray-600 hover:text-primary-blue hover:bg-gray-50 rounded-lg transition-colors'>
-                  Our Team
                 </span>
               </Link>
               <Link href='/careers' onClick={onItemClick}>

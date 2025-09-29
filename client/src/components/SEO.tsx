@@ -151,7 +151,7 @@ export const SEOConfigs = {
     title:
       'Contact Osinachi Renewable Energy - Get Free Consultation | Lagos, Nigeria',
     description:
-      'Contact Osinachi Renewable Energy for expert power solutions. Free consultation, energy audit & quote. Call +234-906-003-3963 or email info@osinachienergy.com. Serving Lagos, Abuja, Port Harcourt & nationwide.',
+      'Contact Osinachi Renewable Energy for expert power solutions. Free consultation, energy audit & quote. Call +234-916-594-7467 or email info@osinachienergy.com. Serving Lagos, Abuja, Port Harcourt & nationwide.',
     keywords:
       'contact Osinachi Renewable Energy, power solutions consultation, energy audit request, generator maintenance quote, solar installation quote, Nigeria power solutions contact',
     canonical: '/contact',

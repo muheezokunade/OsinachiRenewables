@@ -67,50 +67,80 @@ export default function PortfolioProject() {
         </div>
       </section>
       <section className='py-16 bg-white'>
-        <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-start'>
-          <div>
-            <img
-              src={project.image}
-              alt={`${project.title} - ${project.client} - ${project.category} project in Nigeria`}
-              className='rounded-2xl shadow-lg w-full h-auto mb-8'
-            />
-            <div className='mb-6'>
-              <h2 className='font-bold text-2xl text-primary-blue mb-2'>
-                Challenge
-              </h2>
-              <p className='text-gray-700'>{project.challenge}</p>
+        <div className='max-w-6xl mx-auto px-4 sm:px-6 lg:px-8'>
+          {/* Project Images Gallery */}
+          <div className='mb-12'>
+            {project.images && project.images.length > 1 ? (
+              <div>
+                <h2 className='font-bold text-3xl text-primary-blue mb-6 text-center'>
+                  Project Gallery
+                </h2>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8'>
+                  {project.images.map((image, index) => (
+                    <div key={index} className='group cursor-pointer'>
+                      <img
+                        src={image}
+                        alt={`${project.title} - Image ${index + 1}`}
+                        className='rounded-2xl shadow-lg w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105'
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className='mb-8'>
+                <img
+                  src={project.image}
+                  alt={`${project.title} - ${project.client} - ${project.category} project in Nigeria`}
+                  className='rounded-2xl shadow-lg w-full h-auto mx-auto max-w-4xl'
+                />
+              </div>
+            )}
+          </div>
+
+          {/* Project Details */}
+          <div className='grid md:grid-cols-2 gap-12 items-start'>
+            <div>
+              <div className='mb-6'>
+                <h2 className='font-bold text-2xl text-primary-blue mb-2'>
+                  Challenge
+                </h2>
+                <p className='text-gray-700'>{project.challenge}</p>
+              </div>
+              <div className='mb-6'>
+                <h2 className='font-bold text-2xl text-primary-blue mb-2'>
+                  Approach
+                </h2>
+                <p className='text-gray-700'>{project.approach}</p>
+              </div>
+              <div className='mb-6'>
+                <h2 className='font-bold text-2xl text-primary-blue mb-2'>
+                  Solution
+                </h2>
+                <p className='text-gray-700'>{project.solution}</p>
+              </div>
             </div>
-            <div className='mb-6'>
-              <h2 className='font-bold text-2xl text-primary-blue mb-2'>
-                Approach
-              </h2>
-              <p className='text-gray-700'>{project.approach}</p>
+            <div>
+              <div className='mb-6'>
+                <h2 className='font-bold text-2xl text-primary-blue mb-2'>
+                  Results
+                </h2>
+                <p className='text-gray-700'>{project.results}</p>
+              </div>
+              <div className='mb-6'>
+                <h2 className='font-bold text-2xl text-primary-blue mb-2'>
+                  Client Testimonial
+                </h2>
+                <blockquote className='italic text-gray-600 border-l-4 border-accent-yellow pl-4'>
+                  {project.testimonial}
+                </blockquote>
+              </div>
+              <Link href='/portfolio'>
+                <Button className='bg-primary-blue text-white hover:bg-primary-blue/90 mt-6'>
+                  Back to Portfolio
+                </Button>
+              </Link>
             </div>
-            <div className='mb-6'>
-              <h2 className='font-bold text-2xl text-primary-blue mb-2'>
-                Solution
-              </h2>
-              <p className='text-gray-700'>{project.solution}</p>
-            </div>
-            <div className='mb-6'>
-              <h2 className='font-bold text-2xl text-primary-blue mb-2'>
-                Results
-              </h2>
-              <p className='text-gray-700'>{project.results}</p>
-            </div>
-            <div className='mb-6'>
-              <h2 className='font-bold text-2xl text-primary-blue mb-2'>
-                Client Testimonial
-              </h2>
-              <blockquote className='italic text-gray-600 border-l-4 border-accent-yellow pl-4'>
-                {project.testimonial}
-              </blockquote>
-            </div>
-            <Link href='/portfolio'>
-              <Button className='bg-primary-blue text-white hover:bg-primary-blue/90 mt-6'>
-                Back to Portfolio
-              </Button>
-            </Link>
           </div>
         </div>
       </section>

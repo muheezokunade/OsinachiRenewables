@@ -131,10 +131,10 @@ export default function Footer() {
               <div className='flex items-center space-x-3'>
                 <Phone className='h-4 w-4 text-accent-yellow flex-shrink-0' />
                 <a
-                  href='tel:+2349060033963'
+                  href='tel:+2349165947467'
                   className='text-gray-300 hover:text-accent-yellow transition duration-300'
                 >
-                  +234 906 003 3963
+                  +234 916 594 7467
                 </a>
               </div>
               <div className='flex items-center space-x-3'>
@@ -149,7 +149,7 @@ export default function Footer() {
               <div className='flex items-center space-x-3'>
                 <MessageCircle className='h-4 w-4 text-green-400 flex-shrink-0' />
                 <a
-                  href='https://wa.me/2349060033963'
+                  href='https://wa.me/2349165947467'
                   target='_blank'
                   rel='noopener noreferrer'
                   className='text-gray-300 hover:text-green-400 transition duration-300'

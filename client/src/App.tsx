@@ -14,7 +14,6 @@ import About from '@/pages/About';
 import Services from '@/pages/Services';
 import Portfolio from '@/pages/Portfolio';
 import Contact from '@/pages/Contact';
-import OurTeam from '@/pages/OurTeam';
 import Careers from '@/pages/Careers';
 import NewsBlog from '@/pages/NewsBlog';
 import Impact from '@/pages/Impact';
@@ -35,7 +34,6 @@ function Router() {
       <Route path='/services' component={Services} />
       <Route path='/portfolio' component={Portfolio} />
       <Route path='/contact' component={Contact} />
-      <Route path='/ourteam' component={OurTeam} />
       <Route path='/careers' component={Careers} />
       <Route path='/newsblog' component={NewsBlog} />
       <Route path='/impact' component={Impact} />

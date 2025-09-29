@@ -30,15 +30,18 @@ const OurTeam: React.FC = () => {
     },
 
     {
-      name: 'Onuchukwu Chioma Christabel',
-      role: 'Chief Operations Officer',
-      image: '/team/chioma.jpg',
-      // Nudge framing upward to prevent face cropping in circle
-      imageClass: 'object-top',
-      bio: 'Operations expert with 12+ years managing large-scale energy projects across West Africa.',
-      expertise: ['Project Management', 'Operations', 'Quality Control'],
+      name: 'Promise Isaiah',
+      role: 'Lead Solar Engineer',
+      image: '/team/promise-isaiah.jpg',
+      bio: 'Expert solar engineer with extensive experience in designing and implementing large-scale solar energy systems across Nigeria.',
+      expertise: [
+        'Solar System Design',
+        'Renewable Energy Engineering',
+        'Project Implementation',
+      ],
       linkedin: '#',
     },
+
     {
       name: 'Muheez Okunade',
       role: 'Lead Business Analyst',
@@ -145,7 +148,7 @@ const OurTeam: React.FC = () => {
                       <LazyImage
                         src={member.image}
                         alt={`${member.name} - ${member.role}`}
-                        className={`w-full h-full object-cover ${member.imageClass ?? ''}`}
+                        className={`w-full h-full object-cover ${(member as any).imageClass ?? ''}`}
                       />
                     </div>
 

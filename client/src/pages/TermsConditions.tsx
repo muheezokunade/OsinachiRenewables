@@ -338,10 +338,10 @@ export default function TermsConditions() {
                       <div>
                         <p className='font-medium'>Phone:</p>
                         <a
-                          href='tel:+2349060033963'
+                          href='tel:+2349165947467'
                           className='text-green-600 hover:text-green-700 underline'
                         >
-                          +234 906 003 3963
+                          +234 916 594 7467
                         </a>
                       </div>
                     </div>
@@ -351,7 +351,7 @@ export default function TermsConditions() {
                       <div>
                         <p className='font-medium'>WhatsApp:</p>
                         <a
-                          href='https://wa.me/2349060033963'
+                          href='https://wa.me/2349165947467'
                           target='_blank'
                           rel='noopener noreferrer'
                           className='text-green-600 hover:text-green-700 underline'
