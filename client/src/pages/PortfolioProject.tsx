@@ -4,9 +4,7 @@ import Footer from '@/components/Footer';
 
 import SEO from '@/components/SEO';
 import { projects } from '../utils/portfolioData';
-import { Badge } from '@/components/ui/badge';
 import { Link } from 'wouter';
-import { Button } from '@/components/ui/button';
 
 export default function PortfolioProject() {
   const [, params] = useRoute('/portfolio/:slug');
@@ -45,102 +43,120 @@ export default function PortfolioProject() {
         ogImage={project.image}
       />
       <Navigation />
-      <section className='relative bg-primary-blue text-white py-20'>
-        <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8'>
-          <h1 className='font-poppins font-bold text-4xl md:text-5xl mb-4'>
-            {project.title}
+      {/* Hero Section with Background Image */}
+      <section
+        className='relative min-h-[70vh] flex items-center justify-center bg-cover bg-center bg-no-repeat'
+        style={{
+          backgroundImage: `url(${project.image})`,
+        }}
+      >
+        {/* Overlay */}
+        <div className='absolute inset-0 bg-black bg-opacity-40'></div>
+
+        {/* Content */}
+        <div className='relative z-10 text-center text-white max-w-4xl mx-auto px-4 sm:px-6 lg:px-8'>
+          <h1 className='font-poppins font-bold text-4xl md:text-6xl mb-6'>
+            {project.client}
           </h1>
-          <div className='flex flex-wrap gap-4 mb-4'>
-            <Badge
-              variant='secondary'
-              className='bg-accent-yellow/10 text-accent-yellow font-semibold'
-            >
-              {project.category.toUpperCase()}
-            </Badge>
-            <span className='text-lg font-semibold'>
-              Client: {project.client}
-            </span>
-            <span className='text-lg font-semibold'>
-              System Size: {project.systemSize}
-            </span>
-          </div>
         </div>
       </section>
+
       <section className='py-16 bg-white'>
-        <div className='max-w-6xl mx-auto px-4 sm:px-6 lg:px-8'>
-          {/* Project Images Gallery */}
+        <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8'>
+          {/* Challenge Section */}
           <div className='mb-12'>
-            {project.images && project.images.length > 1 ? (
-              <div>
-                <h2 className='font-bold text-3xl text-primary-blue mb-6 text-center'>
-                  Project Gallery
-                </h2>
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8'>
-                  {project.images.map((image, index) => (
-                    <div key={index} className='group cursor-pointer'>
-                      <img
-                        src={image}
-                        alt={`${project.title} - Image ${index + 1}`}
-                        className='rounded-2xl shadow-lg w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105'
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <div className='mb-8'>
-                <img
-                  src={project.image}
-                  alt={`${project.title} - ${project.client} - ${project.category} project in Nigeria`}
-                  className='rounded-2xl shadow-lg w-full h-auto mx-auto max-w-4xl'
-                />
-              </div>
-            )}
+            <h2 className='font-bold text-2xl text-primary-blue mb-4'>
+              Challenge:
+            </h2>
+            <p className='text-gray-700 text-lg leading-relaxed'>
+              {project.challenge}
+            </p>
           </div>
 
-          {/* Project Details */}
-          <div className='grid md:grid-cols-2 gap-12 items-start'>
-            <div>
-              <div className='mb-6'>
-                <h2 className='font-bold text-2xl text-primary-blue mb-2'>
-                  Challenge
-                </h2>
-                <p className='text-gray-700'>{project.challenge}</p>
-              </div>
-              <div className='mb-6'>
-                <h2 className='font-bold text-2xl text-primary-blue mb-2'>
-                  Approach
-                </h2>
-                <p className='text-gray-700'>{project.approach}</p>
-              </div>
-              <div className='mb-6'>
-                <h2 className='font-bold text-2xl text-primary-blue mb-2'>
-                  Solution
-                </h2>
-                <p className='text-gray-700'>{project.solution}</p>
+          {/* Solution Section */}
+          <div className='mb-12'>
+            <h2 className='font-bold text-2xl text-primary-blue mb-4'>
+              Solution:
+            </h2>
+            <p className='text-gray-700 text-lg leading-relaxed'>
+              {project.solution}
+            </p>
+          </div>
+
+          {/* Project Metrics */}
+          <div className='grid md:grid-cols-3 gap-8 mb-12'>
+            <div className='text-center'>
+              <h3 className='font-bold text-2xl text-primary-blue mb-2'>
+                Solar Power output (kWh)
+              </h3>
+              <p className='text-3xl font-bold text-gray-800'>
+                {project.systemSize === '15kW'
+                  ? '18,250'
+                  : project.systemSize === '50kW'
+                    ? '60,000'
+                    : project.systemSize === '75kW'
+                      ? '90,000'
+                      : project.systemSize === '30kW'
+                        ? '36,500'
+                        : project.systemSize === '80kW'
+                          ? '96,000'
+                          : project.systemSize === '120kW'
+                            ? '144,000'
+                            : '25,000'}
+              </p>
+            </div>
+            <div className='text-center'>
+              <h3 className='font-bold text-2xl text-primary-blue mb-2'>
+                Uptime
+              </h3>
+              <p className='text-3xl font-bold text-gray-800'>99%</p>
+            </div>
+            <div className='text-center'>
+              <h3 className='font-bold text-2xl text-primary-blue mb-2'>
+                CO2 Emissions Offset (kg)
+              </h3>
+              <p className='text-3xl font-bold text-gray-800'>
+                {project.systemSize === '15kW'
+                  ? '10,150'
+                  : project.systemSize === '50kW'
+                    ? '33,300'
+                    : project.systemSize === '75kW'
+                      ? '50,000'
+                      : project.systemSize === '30kW'
+                        ? '20,280'
+                        : project.systemSize === '80kW'
+                          ? '53,300'
+                          : project.systemSize === '120kW'
+                            ? '80,000'
+                            : '13,900'}
+              </p>
+            </div>
+          </div>
+
+          {/* Project Gallery - Three Images */}
+          {project.images && project.images.length >= 3 && (
+            <div className='mb-12'>
+              <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
+                {project.images.slice(0, 3).map((image, index) => (
+                  <div key={index} className='group cursor-pointer'>
+                    <img
+                      src={image}
+                      alt={`${project.title} - Image ${index + 1}`}
+                      className='w-full h-64 object-cover rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-105'
+                    />
+                  </div>
+                ))}
               </div>
             </div>
-            <div>
-              <div className='mb-6'>
-                <h2 className='font-bold text-2xl text-primary-blue mb-2'>
-                  Results
-                </h2>
-                <p className='text-gray-700'>{project.results}</p>
-              </div>
-              <div className='mb-6'>
-                <h2 className='font-bold text-2xl text-primary-blue mb-2'>
-                  Client Testimonial
-                </h2>
-                <blockquote className='italic text-gray-600 border-l-4 border-accent-yellow pl-4'>
-                  {project.testimonial}
-                </blockquote>
-              </div>
-              <Link href='/portfolio'>
-                <Button className='bg-primary-blue text-white hover:bg-primary-blue/90 mt-6'>
-                  Back to Portfolio
-                </Button>
-              </Link>
-            </div>
+          )}
+
+          {/* Back to Portfolio */}
+          <div className='text-center'>
+            <Link href='/portfolio'>
+              <button className='bg-primary-blue text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-blue/90 transition-colors duration-300'>
+                Back to Portfolio
+              </button>
+            </Link>
           </div>
         </div>
       </section>

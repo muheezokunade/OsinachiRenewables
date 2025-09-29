@@ -108,7 +108,7 @@ export default function About() {
                 {/* Main Circle Image */}
                 <div className='w-80 h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-2xl border-4 border-white circle-glow'>
                   <img
-                    src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=compress&w=800&h=800&fit=crop'
+                    src='https://i.postimg.cc/MGmHMP9z/PHOTO-2025-09-29-14-33-35.jpg'
                     alt='Solar installation in Nigerian setting - African energy landscape'
                     className='w-full h-full object-cover'
                   />
