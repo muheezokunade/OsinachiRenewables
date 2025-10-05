@@ -45,8 +45,7 @@ export default function Services() {
         'Clubs',
         'Factories',
       ],
-      image:
-        'https://images.pexels.com/photos/4254168/pexels-photo-4254168.jpeg?auto=compress&w=800&h=600&fit=crop',
+      image: 'https://i.postimg.cc/QCg1LF25/PHOTO-2025-09-29-12-53-04.jpg',
     },
     {
       icon: Search,

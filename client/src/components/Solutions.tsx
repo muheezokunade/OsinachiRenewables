@@ -61,7 +61,7 @@ export default function Solutions() {
           {/* Custom Inverter & Solar Systems */}
           <div className='bg-light-gray rounded-2xl p-8'>
             <img
-              src='https://images.pexels.com/photos/4254168/pexels-photo-4254168.jpeg?auto=compress&w=800&h=600&fit=crop'
+              src='https://i.postimg.cc/QCg1LF25/PHOTO-2025-09-29-12-53-04.jpg'
               alt='Solar panel installation'
               className='rounded-xl mb-6 w-full h-64 object-cover'
             />
